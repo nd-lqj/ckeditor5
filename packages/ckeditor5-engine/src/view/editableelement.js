@@ -9,7 +9,7 @@
 
 import ContainerElement from './containerelement';
 import mix from '@ckeditor/ckeditor5-utils/src/mix';
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+import { ObservableMixin } from 'ckeditor5/src/utils';
 
 /**
  * Editable element which can be a {@link module:engine/view/rooteditableelement~RootEditableElement root}

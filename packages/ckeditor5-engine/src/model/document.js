@@ -11,10 +11,7 @@ import Differ from './differ';
 import RootElement from './rootelement';
 import History from './history';
 import DocumentSelection from './documentselection';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
-import EmitterMixin from '@ckeditor/ckeditor5-utils/src/emittermixin';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
+import { CKEditorError, Collection, EmitterMixin, mix } from 'ckeditor5/src/utils';
 import { isInsideSurrogatePair, isInsideCombinedSymbol } from '@ckeditor/ckeditor5-utils/src/unicode';
 import { clone } from 'lodash-es';
 

@@ -33,10 +33,10 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'***This is strong and em.***',
 
-				'<p><strong><em>This is strong and em.</em></strong></p>',
+				'<p><em><strong>This is strong and em.</strong></em></p>',
 
 				// Normalized after converting back.
-				'**_This is strong and em._**'
+				'_**This is strong and em.**_'
 			);
 		} );
 
@@ -44,10 +44,10 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'Single ***word*** is strong and em.',
 
-				'<p>Single <strong><em>word</em></strong> is strong and em.</p>',
+				'<p>Single <em><strong>word</strong></em> is strong and em.</p>',
 
 				// Normalized after converting back.
-				'Single **_word_** is strong and em.'
+				'Single _**word**_ is strong and em.'
 			);
 		} );
 
@@ -55,10 +55,10 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'___This is strong and em.___',
 
-				'<p><strong><em>This is strong and em.</em></strong></p>',
+				'<p><em><strong>This is strong and em.</strong></em></p>',
 
 				// Normalized after converting back.
-				'**_This is strong and em._**'
+				'_**This is strong and em.**_'
 
 			);
 		} );
@@ -67,10 +67,10 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'Single ___word___ is strong and em.',
 
-				'<p>Single <strong><em>word</em></strong> is strong and em.</p>',
+				'<p>Single <em><strong>word</strong></em> is strong and em.</p>',
 
 				// Normalized after converting back.
-				'Single **_word_** is strong and em.'
+				'Single _**word**_ is strong and em.'
 			);
 		} );
 
@@ -94,26 +94,20 @@ describe( 'GFMDataProcessor', () => {
 			);
 		} );
 
-		// Below two tests are not working because marked library renders nested emphasis differently than
-		// it is done on GitHub.
+		it( 'should process nested emphasis #1', () => {
+			testDataProcessor(
+				'*test **test** test*',
+				'<p><em>test <strong>test</strong> test</em></p>',
+				'_test **test** test_'
+			);
+		} );
 
-		// it( 'should process nested emphasis #1', () => {
-		// 	testDataProcessor(
-		// 		'*test **test** test*',
-		//
-		// 		// GitHub is rendering as:
-		// 		// <p><em>test *</em>test** test*</p>
-		//
-		// 		'<p><em>test *</em>test** test*</p>'
-		// 	);
-		// } );
-		// it( 'should process nested emphasis #2', () => {
-		// 	testDataProcessor(
-		// 		'_test __test__ test_',
-		//
-		// 		// GitHub is rendering as:
-		// 		'<p><em>test __test_</em> test_</p>'
-		// 	);
-		// } );
+		it( 'should process nested emphasis #2', () => {
+			testDataProcessor(
+				'_test __test__ test_',
+				'<p><em>test <strong>test</strong> test</em></p>',
+				'_test **test** test_'
+			);
+		} );
 	} );
 } );

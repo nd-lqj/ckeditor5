@@ -8,7 +8,7 @@
  */
 
 import mix from '@ckeditor/ckeditor5-utils/src/mix';
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+import { ObservableMixin } from 'ckeditor5/src/utils';
 import getLastTextLine from './utils/getlasttextline';
 
 /**

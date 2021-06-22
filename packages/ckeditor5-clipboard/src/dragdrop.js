@@ -9,13 +9,10 @@
 
 /* globals setTimeout, clearTimeout */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
-import LiveRange from '@ckeditor/ckeditor5-engine/src/model/liverange';
-import MouseObserver from '@ckeditor/ckeditor5-engine/src/view/observer/mouseobserver';
-import Widget from '@ckeditor/ckeditor5-widget/src/widget';
-import uid from '@ckeditor/ckeditor5-utils/src/uid';
-import env from '@ckeditor/ckeditor5-utils/src/env';
-import { isWidget } from '@ckeditor/ckeditor5-widget/src/utils';
+import { Plugin } from 'ckeditor5/src/core';
+import { LiveRange, MouseObserver } from 'ckeditor5/src/engine';
+import { env, uid } from 'ckeditor5/src/utils';
+import { Widget, isWidget } from 'ckeditor5/src/widget';
 
 import ClipboardPipeline from './clipboardpipeline';
 import ClipboardObserver from './clipboardobserver';

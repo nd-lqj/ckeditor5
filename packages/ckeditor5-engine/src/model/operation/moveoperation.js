@@ -10,7 +10,7 @@
 import Operation from './operation';
 import Position from '../position';
 import Range from '../range';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import compareArrays from '@ckeditor/ckeditor5-utils/src/comparearrays';
 import { _move } from './utils';
 

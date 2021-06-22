@@ -11,7 +11,7 @@ import BalloonPanelView from '@ckeditor/ckeditor5-ui/src/panel/balloon/balloonpa
 
 import global from '@ckeditor/ckeditor5-utils/src/dom/global';
 import Rect from '@ckeditor/ckeditor5-utils/src/dom/rect';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import toArray from '@ckeditor/ckeditor5-utils/src/toarray';
 
 import HighlightStack from './highlightstack';

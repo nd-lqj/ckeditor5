@@ -7,7 +7,7 @@
  * @module undo/basecommand
  */
 
-import Command from '@ckeditor/ckeditor5-core/src/command';
+import { Command } from 'ckeditor5/src/core';
 import { transformSets } from '@ckeditor/ckeditor5-engine/src/model/operation/transform';
 
 /**

@@ -7,7 +7,7 @@
 
 import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
-import ArticlePluginSet from '@ckeditor/ckeditor5-core/tests/_utils/articlepluginset';
+import { ArticlePluginSet } from 'ckeditor5/src/core';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';

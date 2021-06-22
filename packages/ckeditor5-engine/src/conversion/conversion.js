@@ -7,7 +7,7 @@
  * @module engine/conversion/conversion
  */
 
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import UpcastHelpers from './upcasthelpers';
 import DowncastHelpers from './downcasthelpers';
 import toArray from '@ckeditor/ckeditor5-utils/src/toarray';

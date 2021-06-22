@@ -70,17 +70,11 @@ describe( 'GFMDataProcessor', () => {
 				'single line\n' +
 				'*   item',
 
-				// GitHub is rendering as:
-				// <p>single line</p>
-				//
-				// <ul>
-				// <li>item</li>
-				// </ul>
 				'<p>single line</p><ul><li>item</li></ul>',
 
 				'single line\n' +
 				'\n' +
-				'*   item'
+				'* item'
 			);
 		} );
 	} );

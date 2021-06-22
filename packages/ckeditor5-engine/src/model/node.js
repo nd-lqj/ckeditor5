@@ -8,7 +8,7 @@
  */
 
 import toMap from '@ckeditor/ckeditor5-utils/src/tomap';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import compareArrays from '@ckeditor/ckeditor5-utils/src/comparearrays';
 // To check if component is loaded more than once.
 import '@ckeditor/ckeditor5-utils/src/version';

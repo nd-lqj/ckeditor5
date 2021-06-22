@@ -28,6 +28,10 @@ msgctxt "The label for the Full size image option."
 msgid "Full size image"
 msgstr "Full size image"
 
+msgctxt "The label for the image style button that places the image inside the line of text."
+msgid "In line"
+msgstr "In line image"
+
 msgctxt "The label for the Left aligned image option."
 msgid "Left aligned image"
 msgstr "Left aligned image"

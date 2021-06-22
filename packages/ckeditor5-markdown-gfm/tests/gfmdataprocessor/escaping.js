@@ -4,10 +4,8 @@
  */
 
 import MarkdownDataProcessor from '../../src/gfmdataprocessor';
-import { stringify } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 import { testDataProcessor } from '../../tests/_utils/utils';
-import ViewDocument from '@ckeditor/ckeditor5-engine/src/view/document';
-import { StylesProcessor } from '@ckeditor/ckeditor5-engine/src/view/stylesmap';
+import { stringify, StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
 
 const testCases = {
 	'backslash': { test: '\\\\', result: '\\' },
@@ -49,7 +47,7 @@ describe( 'GFMDataProcessor', () => {
 				it( `should not escape ${ key } in code blocks`, () => {
 					const documentFragment = dataProcessor.toView( `	${ test }` );
 
-					expect( stringify( documentFragment ) ).to.equal( `<pre><code>${ test }</code></pre>` );
+					expect( stringify( documentFragment ) ).to.equal( `<pre><code>${ test }\n</code></pre>` );
 				} );
 
 				it( `should not escape ${ key } in code spans`, () => {
@@ -68,7 +66,8 @@ describe( 'GFMDataProcessor', () => {
 			it( 'should not escape backtick in code blocks', () => {
 				const documentFragment = dataProcessor.toView( '	\\`' );
 
-				expect( stringify( documentFragment ) ).to.equal( '<pre><code>\\`</code></pre>' );
+				expect( stringify( documentFragment ) ).to.equal( '<pre><code>\\`\n' +
+				'</code></pre>' );
 			} );
 		} );
 
@@ -95,7 +94,7 @@ describe( 'GFMDataProcessor', () => {
 					'\\<h1>Test\\</h1>\n' +
 					'```',
 					'<pre><code>' +
-					'\\<h1>Test\\</h1>' +
+					'\\<h1>Test\\</h1>\n' +
 					'</code></pre>' );
 			} );
 

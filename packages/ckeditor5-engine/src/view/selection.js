@@ -7,7 +7,7 @@
  * @module engine/view/selection
  */
 
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import Range from './range';
 import Position from './position';
 import mix from '@ckeditor/ckeditor5-utils/src/mix';

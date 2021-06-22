@@ -13,7 +13,7 @@ import ModelPosition from '../model/position';
 import { SchemaContext } from '../model/schema';
 import { isParagraphable, wrapInParagraph } from '../model/utils/autoparagraphing';
 
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import EmitterMixin from '@ckeditor/ckeditor5-utils/src/emittermixin';
 import mix from '@ckeditor/ckeditor5-utils/src/mix';
 

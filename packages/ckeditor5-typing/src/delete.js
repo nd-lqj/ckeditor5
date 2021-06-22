@@ -7,7 +7,7 @@
  * @module typing/delete
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import DeleteCommand from './deletecommand';
 import DeleteObserver from './deleteobserver';
 import env from '@ckeditor/ckeditor5-utils/src/env';

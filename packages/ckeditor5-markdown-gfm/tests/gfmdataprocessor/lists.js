@@ -5,9 +5,7 @@
 
 import { testDataProcessor } from '../_utils/utils';
 import MarkdownDataProcessor from '../../src/gfmdataprocessor';
-import HtmlDataProcessor from '@ckeditor/ckeditor5-engine/src/dataprocessor/htmldataprocessor';
-import ViewDocument from '@ckeditor/ckeditor5-engine/src/view/document';
-import { StylesProcessor } from '@ckeditor/ckeditor5-engine/src/view/stylesmap';
+import { HtmlDataProcessor, StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
 
 describe( 'GFMDataProcessor', () => {
 	describe( 'lists', () => {
@@ -25,10 +23,10 @@ describe( 'GFMDataProcessor', () => {
 				// </ul>
 				'<ul><li>item 1</li><li>item 2</li><li>item 3</li></ul>',
 
-				// List will be normalized to 3-space representation.
-				'*   item 1\n' +
-				'*   item 2\n' +
-				'*   item 3'
+				// List will be normalized to one space representation.
+				'* item 1\n' +
+				'* item 2\n' +
+				'* item 3'
 			);
 		} );
 
@@ -53,12 +51,12 @@ describe( 'GFMDataProcessor', () => {
 					'</li>' +
 				'</ul>',
 
-				// List will be normalized to 3-space representation.
-				'*   item 1\n' +
+				// List will be normalized to one space representation.
+				'* item 1\n' +
 				'\n' +
-				'*   item 2\n' +
+				'* item 2\n' +
 				'\n' +
-				'*   item 3'
+				'* item 3'
 			);
 		} );
 
@@ -74,10 +72,10 @@ describe( 'GFMDataProcessor', () => {
 					'<li>item 3</li>' +
 				'</ul>',
 
-				// List will be normalized to asterisks, 3-space representation.
-				'*   item 1\n' +
-				'*   item 2\n' +
-				'*   item 3'
+				// List will be normalized to asterisks, one space representation.
+				'* item 1\n' +
+				'* item 2\n' +
+				'* item 3'
 			);
 		} );
 
@@ -101,12 +99,12 @@ describe( 'GFMDataProcessor', () => {
 					'</li>' +
 				'</ul>',
 
-				// List will be normalized to asterisks, 3-space representation.
-				'*   item 1\n' +
+				// List will be normalized to asterisks, one space representation.
+				'* item 1\n' +
 				'\n' +
-				'*   item 2\n' +
+				'* item 2\n' +
 				'\n' +
-				'*   item 3'
+				'* item 3'
 			);
 		} );
 
@@ -122,10 +120,10 @@ describe( 'GFMDataProcessor', () => {
 					'<li>item 3</li>' +
 				'</ul>',
 
-				// List will be normalized to asterisks, 3-space representation.
-				'*   item 1\n' +
-				'*   item 2\n' +
-				'*   item 3'
+				// List will be normalized to asterisks, one space representation.
+				'* item 1\n' +
+				'* item 2\n' +
+				'* item 3'
 			);
 		} );
 
@@ -149,12 +147,12 @@ describe( 'GFMDataProcessor', () => {
 					'</li>' +
 				'</ul>',
 
-				// List will be normalized to asterisks, 3-space representation.
-				'*   item 1\n' +
+				// List will be normalized to asterisks, one space representation.
+				'* item 1\n' +
 				'\n' +
-				'*   item 2\n' +
+				'* item 2\n' +
 				'\n' +
-				'*   item 3'
+				'* item 3'
 			);
 		} );
 
@@ -171,9 +169,9 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// List will be normalized to 2-space representation.
-				'1.  item 1\n' +
-				'2.  item 2\n' +
-				'3.  item 3'
+				'1. item 1\n' +
+				'2. item 2\n' +
+				'3. item 3'
 			);
 		} );
 
@@ -190,9 +188,9 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// List will be normalized to 2-space representation.
-				'1.  item 1\n' +
-				'2.  item 2\n' +
-				'3.  item 3'
+				'1. item 1\n' +
+				'2. item 2\n' +
+				'3. item 3'
 			);
 		} );
 
@@ -217,11 +215,11 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// List will be normalized to 2-space representation.
-				'1.  item 1\n' +
+				'1. item 1\n' +
 				'\n' +
-				'2.  item 2\n' +
+				'2. item 2\n' +
 				'\n' +
-				'3.  item 3'
+				'3. item 3'
 			);
 		} );
 
@@ -246,11 +244,11 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// List will be normalized to 2-space representation.
-				'1.  item 1\n' +
+				'1. item 1\n' +
 				'\n' +
-				'2.  item 2\n' +
+				'2. item 2\n' +
 				'\n' +
-				'3.  item 3'
+				'3. item 3'
 			);
 		} );
 
@@ -276,12 +274,12 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// All lists will be normalized after converting back.
-				'1.  First\n' +
-				'2.  Second:\n' +
-				'    *   Fee\n' +
-				'    *   Fie\n' +
-				'    *   Foe\n' +
-				'3.  Third'
+				'1. First\n' +
+				'2. Second:\n' +
+				'    * Fee\n' +
+				'    * Fie\n' +
+				'    * Foe\n' +
+				'3. Third'
 			);
 		} );
 
@@ -314,14 +312,14 @@ describe( 'GFMDataProcessor', () => {
 				'</ol>',
 
 				// All lists will be normalized after converting back.
-				'1.  First\n' +
+				'1. First\n' +
 				'\n' +
-				'2.  Second:\n' +
+				'2. Second:\n' +
 				'\n' +
-				'    *   Fee\n' +
-				'    *   Fie\n' +
-				'    *   Foe\n' +
-				'3.  Third'
+				'    * Fee\n' +
+				'    * Fie\n' +
+				'    * Foe\n' +
+				'3. Third'
 			);
 		} );
 
@@ -333,14 +331,18 @@ describe( 'GFMDataProcessor', () => {
 
 				'<ul>' +
 					'<li>test</li>' +
+				'</ul>' +
+				'<ul>' +
 					'<li>test</li>' +
+				'</ul>' +
+				'<ul>' +
 					'<li>test</li>' +
 				'</ul>',
 
 				// After converting back list items will be unified.
-				'*   test\n' +
-				'*   test\n' +
-				'*   test'
+				'* test\n\n' +
+				'* test\n\n' +
+				'* test'
 			);
 		} );
 	} );
@@ -348,8 +350,8 @@ describe( 'GFMDataProcessor', () => {
 	describe( 'todo lists', () => {
 		it( 'should process todo lists', () => {
 			testDataProcessor(
-				'*   [ ] Item 1\n' +
-				'*   [x] Item 2',
+				'* [ ] Item 1\n' +
+				'* [x] Item 2',
 
 				'<ul>' +
 					'<li><input disabled="" type="checkbox"></input>Item 1</li>' +
@@ -377,8 +379,8 @@ describe( 'GFMDataProcessor', () => {
 			);
 
 			expect( mdDataProcessor.toData( viewFragment ) ).to.equal(
-				'*   [ ] Item 1\n' +
-				'*   [x] Item 2'
+				'* [ ] Item 1\n' +
+				'* [x] Item 2'
 			);
 		} );
 	} );

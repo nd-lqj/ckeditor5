@@ -11,7 +11,7 @@ import Template from '@ckeditor/ckeditor5-ui/src/template';
 import Rect from '@ckeditor/ckeditor5-utils/src/dom/rect';
 import compareArrays from '@ckeditor/ckeditor5-utils/src/comparearrays';
 
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+import { ObservableMixin } from 'ckeditor5/src/utils';
 import mix from '@ckeditor/ckeditor5-utils/src/mix';
 
 import ResizeState from './resizerstate';

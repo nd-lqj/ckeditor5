@@ -15,12 +15,9 @@ import CommandCollection from '../commandcollection';
 import DataController from '@ckeditor/ckeditor5-engine/src/controller/datacontroller';
 import Conversion from '@ckeditor/ckeditor5-engine/src/conversion/conversion';
 import Model from '@ckeditor/ckeditor5-engine/src/model/model';
-import EditingKeystrokeHandler from '../editingkeystrokehandler';
-
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError, mix, ObservableMixin } from 'ckeditor5/src/utils';
 import { StylesProcessor } from '@ckeditor/ckeditor5-engine/src/view/stylesmap';
+import EditingKeystrokeHandler from '../editingkeystrokehandler';
 
 /**
  * The class representing a basic, generic editor.

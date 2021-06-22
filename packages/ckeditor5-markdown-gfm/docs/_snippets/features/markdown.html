@@ -1,68 +1,64 @@
 <textarea id="snippet-markdown">
+### One WYSIWYG framework, multiple purposes
 
-<h2>The Markdown language</h2>
-<p>Markdown is a lightweight markup language that you can use to add formatting elements to plain text documents. Created by <a href="https://daringfireball.net/projects/markdown/" target="_blank">John Gruber</a> in <s>2003</s>2004, Markdown is now one of the world&rsquo;s most popular markup languages.</p>
+![alt text][logo]
 
-<hr />
+> Everybody is a genius. But if you judge a fish by its ability to climb a tree, it will live its whole life believing that it is stupid.
+>
+> Albert Einstein
 
-<h2>Editing with Markdown output</h2>
-<p>The <a href="https://ckeditor.com/">CKEditor 5 WYSIWYG</a> editor lets you use this flexible yet simple markup language in the GitHub flavor. The editor-produced Markdown output supports the most important features, like <a href="https://ckeditor.com/">links</a>, <strong>different</strong> kinds of <em>emphasis</em>, <code>inline code formatting</code> or code blocks:</p>
+![](https://via.placeholder.com/160x100)
 
-&lt;pre>&lt;code class="language-css">p {
-	text-align: center;
-	color: red;
-  }&lt;/code>&lt;/pre>
+---
 
-<h2>Formatting blocks with Markdown</h2>
-<p>Markdown can be used to create various block-level features, such as:</p>
-<ul>
-	<li>Block quotes</li>
-	<li>Headings
-		<ol>
-			<li>Heading 1</li>
-			<li>Heading 2</li>
-			<li>Heading 3</li>
-		</ol>
-	</li>
-	<li>Lists, including nested ones
-		<ul>
-			<li>Numbered lists</li>
-			<li>Bulleted lists</li>
-			<li>To-do lists</li>
-		</ul>
-	</li>
-</ul>
+```js
+ClassicEditor
+	.create( document.querySelector( '#editor' ) )
+	.catch( error => {
+		console.error( error );
+	} );
+```
 
-<h2>Support for tables in Markdown</h2>
-<p>Bear in mind that Markdown has only very basic support for tables, so things like table styles or merged cells will not work.</p>
+| Name | Mass (1024kg) | Diameter (km) | Gravity (m/s2) | Length of day (hours) | Distance from Sun (106km) | Mean temperature (°C) |
+| --- | --- | --- | --- | --- | --- | --- |
+| Mercury | 0.330 | 4,879 | 3.7 | 4222.6 | 57.9 | 167 |
+| Venus | 4.87 | 12,104 | 8.9 | 2802.0 | 108.2 | 464 |
+| Earth | 5.97 | 12,756 | 9.8 | 24.0 | 149.6 | 15 |
+| Mars | 0.642 | 6,792 | 3.7 | 24.7 | 227.9 | \-65 |
+| Jupiter | 1898 | 142,984 | 23.1 | 9.9 | 778.6 | \-110 |
+| Saturn | 568 | 120,536 | 9.0 | 10.7 | 1433.5 | \-140 |
+| Uranus | 86.8 | 51,118 | 8.7 | 17.2 | 2872.5 | \-195 |
+| Neptune | 102 | 49,528 | 11.0 | 16.1 | 4495.1 | \-200 |
 
-<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
-	<thead>
-		<tr>
-			<th scope="row">&nbsp;</th>
-			<th scope="col">Income</th>
-			<th scope="col">Revenue</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th scope="row">Walker 3</th>
-			<td style="text-align:center">$104.000</td>
-			<td style="text-align:center">15%</td>
-		</tr>
-		<tr>
-			<th scope="row">Stroller</th>
-			<td style="text-align:center">$12.000</td>
-			<td style="text-align:center">10%</td>
-		</tr>
-		<tr>
-			<th scope="row">Runner</th>
-			<td style="text-align:center">$97.500</td>
-			<td style="text-align:center">15%</td>
-		</tr>
-	</tbody>
-</table>
+~CKEditor~ 5 provides _every_ type of `WYSIWYG` **editing** solution imaginable. From editors similar to [**Google Docs**](https://docs.google.com/) ...
 
+![oembed](https://www.youtube.com/watch?v=H08tGjXNHO4)
+
+[Examples](https://ckeditor.com/docs/ckeditor5/latest/examples/index.html)
+
+### Modern manned spacecraft
+
+1. Soyuz (Soviet/Russian)
+	1. Early stage (all retired)
+		* [ ] 7K-OK
+		* [ ] 7KT-OK
+		* [ ] 7K-T
+		* [ ] 7K-TM
+	2. Soyuz T (retired)
+	3. Soyuz TM (retired)
+	4. Soyuz TMA (retired)
+	5. Soyuz TMA-M (retired)
+	6. Soyuz MS
+2. STS orbiter (American; all retired)
+	- [ ] Columbia
+	- [ ] Challenger
+	- [ ] Discovery
+	- [ ] Atlantis
+	- [ ] Endeavour
+3. SpaceX Crew Dragon (American)
+4. Shenzhou (Chinese)
+
+[logo]: https://via.placeholder.com/160x100
 </textarea>
 
 <p>Output:</p>

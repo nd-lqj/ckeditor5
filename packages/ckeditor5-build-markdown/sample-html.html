@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CKMD - HTML</title>
+	<style>
+		body {
+			margin: 0;
+		}
+		header {
+			display: flex;
+			margin: 20px;
+			gap: 20px;
+			align-items: center;
+		}
+		header > input {
+			margin-right: -10px;
+		}
+		main {
+			display: flex;
+			margin: 20px;
+			gap: 20px;
+			position: relative;
+		}
+		main > section:nth-child(1) {
+			flex: 5.5;
+		}
+		main > section:nth-child(2) {
+			flex: 1.5 1.5 15%;
+			padding: 0 10px;
+			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
+		}
+		main > section:nth-child(3) {
+			flex: 1.5 1.5 15%;
+			padding: 0 10px;
+			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
+		}
+		main > section:nth-child(4) {
+			flex: 1.5 1.5 15%;
+			padding: 0 10px;
+			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
+		}
+		main > section.collapsed {
+			position: absolute;
+			visibility: hidden;
+			z-index: -1;
+		}
+		textarea#editor {
+			position: absolute;
+			visibility: hidden;
+			z-index: -1;
+		}
+		pre {
+			white-space: pre-wrap;
+			word-break: break-word;
+		}
+	</style>
+</head>
+<body>
+
+<header>
+	<input id="toggle-2" aria-label="toggle" type="checkbox" /> <label for="toggle-2">markdown</label>
+	<input id="toggle-3" aria-label="toggle" type="checkbox" /> <label for="toggle-3">html</label>
+	<input id="toggle-4" aria-label="toggle" type="checkbox" /> <label for="toggle-4">preview</label>
+</header>
+
+<main>
+	<section>
+		<textarea id="editor"><h3>One WYSIWYG framework, multiple purposes</h3><blockquote><p>Everybody is a genius. But if you judge a fish by its ability to climb a tree, it will live its whole life believing that it is stupid.</p><p>Albert Einstein</p></blockquote><figure class="media"><oembed url="https://www.youtube.com/watch?v=H08tGjXNHO4"></oembed></figure><figure class="image"><a href="http://localhost:5000/builds/cms/sample/"><img src="https://via.placeholder.com/160x100" alt="alt text"></a></figure><figure class="image"><img src="https://via.placeholder.com/160x100" alt=""></figure><p><img src="https://via.placeholder.com/160x100" alt=""><img src="https://via.placeholder.com/160x100" alt=""></p><p>inline <img src="https://via.placeholder.com/160x100" alt="">inline</p><hr><pre><code class="language-js">CKMD
+	.create( document.querySelector( '#editor' ) )
+	.catch( error =&gt; {
+		console.error( error );
+	} );
+</code></pre><figure class="table"><table><thead><tr><th>Name</th><th>Mass (1024kg)</th><th>Diameter (km)</th><th>Gravity (m/s2)</th><th>Length of day (hours)</th><th>Distance from Sun (106km)</th><th>Mean temperature (°C)</th></tr></thead><tbody><tr><td>Mercury</td><td>0.330</td><td>4,879</td><td>3.7</td><td>4222.6</td><td>57.9</td><td>167</td></tr><tr><td>Venus</td><td>4.87</td><td>12,104</td><td>8.9</td><td>2802.0</td><td>108.2</td><td>464</td></tr><tr><td>Earth</td><td>5.97</td><td>12,756</td><td>9.8</td><td>24.0</td><td>149.6</td><td>15</td></tr><tr><td>Mars</td><td>0.642</td><td>6,792</td><td>3.7</td><td>24.7</td><td>227.9</td><td>-65</td></tr><tr><td>Jupiter</td><td>1898</td><td>142,984</td><td>23.1</td><td>9.9</td><td>778.6</td><td>-110</td></tr><tr><td>Saturn</td><td>568</td><td>120,536</td><td>9.0</td><td>10.7</td><td>1433.5</td><td>-140</td></tr><tr><td>Uranus</td><td>86.8</td><td>51,118</td><td>8.7</td><td>17.2</td><td>2872.5</td><td>-195</td></tr><tr><td>Neptune</td><td>102</td><td>49,528</td><td>11.0</td><td>16.1</td><td>4495.1</td><td>-200</td></tr></tbody></table></figure><p><s>CKMD</s> 5 provides <i>every</i> type of <code>WYSIWYG</code> <strong>editing</strong> solution imaginable. From editors similar to <a href="https://docs.google.com/"><strong>Google Docs</strong></a> ...</p><p><a href="https://ckeditor.com/docs/ckeditor5/latest/examples/index.html">Examples</a></p><h3>Modern manned spacecraft</h3><ol><li>Soyuz (Soviet/Russian)<ol><li>Early stage (all retired)<ul class="todo-list"><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">7K-OK</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">7KT-OK</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">7K-T</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">7K-TM</span></label></li></ul></li><li>Soyuz T (retired)</li><li>Soyuz TM (retired)</li><li>Soyuz TMA (retired)</li><li>Soyuz TMA-M (retired)</li><li>Soyuz MS</li></ol></li><li>STS orbiter (American; all retired)<ul class="todo-list"><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">Columbia</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">Challenger</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">Discovery</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">Atlantis</span></label></li><li><label class="todo-list__label"><input type="checkbox" disabled="disabled"><span class="todo-list__label__description">Endeavour</span></label></li></ul></li><li>SpaceX Crew Dragon (American)</li><li>Shenzhou (Chinese)</li></ol></textarea>
+	</section>
+
+	<section class="collapsed">
+		<pre><code id="markdown"></code></pre>
+	</section>
+
+	<section class="collapsed">
+		<pre><code id="html"></code></pre>
+	</section>
+
+	<section class="collapsed">
+		<div id="preview"></div>
+	</section>
+</main>
+
+<script src="./build/ckmd.js"></script>
+<script src="./build/translations/zh-cn.js"></script>
+<script>
+	function UploadAdapterPlugin(editor) {
+		editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+			return {
+				upload() {
+					return loader.file.then(async (file) => {
+						// loader.uploaded = false;
+						await new Promise((resolve) => {
+							setTimeout(resolve, 3000);
+						});
+						// loader.uploaded = true;
+						return { default: URL.createObjectURL(file), source: null };
+					});
+				},
+				abort() {},
+			};
+		};
+	}
+
+
+	function handleEditor(editor) {
+		window.editor = editor;
+
+		const callback = () => {
+			const data = editor.getData();
+			const markdown = CKMD.markdown2html(data);
+
+			const e2 = document.querySelector('#markdown');
+			if (!e2.classList.contains('collapsed')) e2.textContent = markdown;
+
+			const e3 = document.querySelector('#html');
+			if (!e3.classList.contains('collapsed')) e3.textContent = data;
+
+			const e4 = document.querySelector('#preview');
+			if (!e4.classList.contains('collapsed')) e4.innerHTML = data;
+		}
+
+		editor.model.document.on('change:data', callback);
+
+		setTimeout(callback, 500);
+	}
+
+	CKMD.create( document.querySelector('#editor'), {
+		language: 'zh-cn',
+		removePlugins: ['Markdown'],
+		extraPlugins: [
+			UploadAdapterPlugin,
+		],
+	} )
+	.then(handleEditor)
+	.catch((error) => {
+		console.error( 'There was a problem initializing the editor.', error );
+	});
+
+	function handleToggle(index) {
+		const checkbox = document.querySelector('#toggle-' + index);
+
+		checkbox.addEventListener('change', (e) => {
+			console.log(e);
+			const el = document.querySelector('main > section:nth-child(' + index + ')');
+
+			if (!e.target.checked) {
+				el.classList.add('collapsed')
+				localStorage.removeItem('toggle' + index)
+			} else {
+				el.classList.remove('collapsed')
+				localStorage.setItem('toggle' + index, '1')
+			}
+
+		});
+
+		checkbox.checked = Boolean(localStorage.getItem('toggle' + index));
+
+		const event = document.createEvent("HTMLEvents");
+		event.initEvent('change', false, true);
+		checkbox.dispatchEvent(event);
+	}
+
+	[2, 3, 4].forEach(handleToggle);
+</script>
+
+</body>
+</html>

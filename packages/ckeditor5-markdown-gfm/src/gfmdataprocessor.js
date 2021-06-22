@@ -9,8 +9,8 @@
 
 import { HtmlDataProcessor } from 'ckeditor5/src/engine';
 
-import markdown2html from './markdown2html/markdown2html';
-import html2markdown, { turndownService } from './html2markdown/html2markdown';
+import markdown2html from './markdown2html';
+import html2markdown from './html2markdown';
 
 /**
  * This data processor implementation uses GitHub Flavored Markdown as input/output data.
@@ -43,9 +43,9 @@ export default class GFMDataProcessor {
 	 *
 	 * @param element {String} The element name to be kept.
 	 */
-	keepHtml( element ) {
-		turndownService.keep( [ element ] );
-	}
+	// keepHtml( element ) {
+	// 	turndownService.keep( [ element ] );
+	// }
 
 	/**
 	 * Converts the provided Markdown string to a view tree.

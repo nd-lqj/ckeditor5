@@ -9,7 +9,7 @@ describe( 'GFMDataProcessor', () => {
 	describe( 'tabs', () => {
 		it( 'should process list item with tabs', () => {
 			testDataProcessor(
-				'+	this is a list item indented with tabs',
+				'+ this is a list item indented with tabs',
 
 				// GitHub will render it as (notice two spaces at the beginning of the list item):
 				// <ul>
@@ -20,7 +20,7 @@ describe( 'GFMDataProcessor', () => {
 				'</ul>',
 
 				// After converting back list will be normalized to *.
-				'*   this is a list item indented with tabs'
+				'* this is a list item indented with tabs'
 			);
 		} );
 
@@ -37,7 +37,7 @@ describe( 'GFMDataProcessor', () => {
 				'</ul>',
 
 				// After converting back list will be normalized to *.
-				'*   this is a list item indented with spaces'
+				'* this is a list item indented with spaces'
 			);
 		} );
 
@@ -45,7 +45,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'	this code block is indented by one tab',
 
-				'<pre><code>this code block is indented by one tab</code></pre>',
+				'<pre><code>this code block is indented by one tab\n' +
+				'</code></pre>',
 
 				// After converting back code block will be normalized to ``` representation.
 				'```\n' +
@@ -58,7 +59,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'		this code block is indented by two tabs',
 
-				'<pre><code>    this code block is indented by two tabs</code></pre>',
+				'<pre><code>\tthis code block is indented by two tabs\n' +
+				'</code></pre>',
 
 				// After converting back code block will be normalized to ``` representation.
 				'```\n' +
@@ -72,14 +74,12 @@ describe( 'GFMDataProcessor', () => {
 				'	+	list item\n' +
 				'	next line',
 
-				'<pre><code>+    list item\n' +
-				'next line</code></pre>',
-
-				// After converting back code block will be normalized to ``` representation.
-				'```\n' +
-				'+    list item\n' +
+				'<pre><code>+\tlist item\n' +
 				'next line\n' +
-				'```'
+				'</code></pre>',
+
+				'+\tlist item\n' +
+				'    next line\n'
 			);
 		} );
 	} );

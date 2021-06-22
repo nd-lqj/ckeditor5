@@ -7,26 +7,23 @@
  * @module engine/model/model
  */
 
+import { CKEditorError, mix, ObservableMixin } from 'ckeditor5/src/utils';
 import Batch from './batch';
 import Writer from './writer';
 import Schema from './schema';
 import Document from './document';
 import MarkerCollection from './markercollection';
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
 import ModelElement from './element';
 import ModelRange from './range';
 import ModelPosition from './position';
 import ModelSelection from './selection';
 import OperationFactory from './operation/operationfactory';
-
 import insertContent from './utils/insertcontent';
 import deleteContent from './utils/deletecontent';
 import modifySelection from './utils/modifyselection';
 import getSelectedContent from './utils/getselectedcontent';
 import { injectSelectionPostFixer } from './utils/selection-post-fixer';
 import { autoParagraphEmptyRoots } from './utils/autoparagraphing';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
 
 // @if CK_DEBUG_ENGINE // const { dumpTrees } = require( '../dev-utils/utils' );
 // @if CK_DEBUG_ENGINE // const { OperationReplayer } = require( '../dev-utils/operationreplayer' ).default;

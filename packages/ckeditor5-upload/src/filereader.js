@@ -9,7 +9,7 @@
 
 /* globals window */
 
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
+import { ObservableMixin } from 'ckeditor5/src/utils';
 import mix from '@ckeditor/ckeditor5-utils/src/mix';
 
 /**

@@ -7,7 +7,7 @@
  * @module undo/undoui
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
 import undoIcon from '../theme/icons/undo.svg';

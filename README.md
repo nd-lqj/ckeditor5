@@ -312,6 +312,18 @@ See CKEditor 5 release blog posts [on the CKEditor blog](https://ckeditor.com/bl
 	</td>
 </tr>
 
+<tr>
+	<td>
+		<a href="https://github.com/crossjs/ckeditor5/tree/master/packages/ckeditor5-build-markdown"><code>ckmd</code></a>
+	</td>
+	<td>
+		<a href="https://www.npmjs.com/package/ckmd"><img src="https://img.shields.io/npm/v/ckmd.svg" alt="ckmd npm package badge"></a>
+	</td>
+	<td>
+		CKEditor 5 classic editor build, with github flavored markdown support.
+	</td>
+</tr>
+
 </tbody>
 </table>
 

@@ -7,7 +7,7 @@
  * @module select-all/selectallui
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import ButtonView from '@ckeditor/ckeditor5-ui/src/button/buttonview';
 
 import selectAllIcon from '../theme/icons/select-all.svg';

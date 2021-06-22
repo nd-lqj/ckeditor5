@@ -7,11 +7,9 @@
  * @module clipboard/clipboardpipeline
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import EventInfo from '@ckeditor/ckeditor5-utils/src/eventinfo';
-
 import ClipboardObserver from './clipboardobserver';
-
 import plainTextToHtml from './utils/plaintexttohtml';
 import normalizeClipboardHtml from './utils/normalizeclipboarddata';
 import viewToPlainText from './utils/viewtoplaintext.js';

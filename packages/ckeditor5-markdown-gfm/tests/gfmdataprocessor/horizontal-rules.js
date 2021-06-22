@@ -31,7 +31,8 @@ describe( 'GFMDataProcessor', () => {
 					'    ---',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>---</code></pre>',
+					'<pre><code>---\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +
@@ -63,7 +64,8 @@ describe( 'GFMDataProcessor', () => {
 					'    - - -',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>- - -</code></pre>',
+					'<pre><code>- - -\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +
@@ -95,7 +97,8 @@ describe( 'GFMDataProcessor', () => {
 					'    ***',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>***</code></pre>',
+					'<pre><code>***\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +
@@ -127,7 +130,8 @@ describe( 'GFMDataProcessor', () => {
 					'    * * *',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>* * *</code></pre>',
+					'<pre><code>* * *\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +
@@ -159,7 +163,8 @@ describe( 'GFMDataProcessor', () => {
 					'    ___',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>___</code></pre>',
+					'<pre><code>___\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +
@@ -191,7 +196,8 @@ describe( 'GFMDataProcessor', () => {
 					'    _ _ _',
 
 					// Four spaces are interpreted as code block.
-					'<pre><code>_ _ _</code></pre>',
+					'<pre><code>_ _ _\n' +
+					'</code></pre>',
 
 					// Code block will be normalized to ``` representation.
 					'```\n' +

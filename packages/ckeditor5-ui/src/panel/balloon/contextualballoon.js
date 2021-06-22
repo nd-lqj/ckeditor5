@@ -11,7 +11,7 @@ import { Plugin } from 'ckeditor5/src/core';
 import BalloonPanelView from './balloonpanelview';
 import View from '../../view';
 import ButtonView from '../../button/buttonview';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import FocusTracker from '@ckeditor/ckeditor5-utils/src/focustracker';
 import toUnit from '@ckeditor/ckeditor5-utils/src/dom/tounit';
 import Rect from '@ckeditor/ckeditor5-utils/src/dom/rect';

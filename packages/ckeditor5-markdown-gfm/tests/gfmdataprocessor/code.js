@@ -55,10 +55,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'	code block',
 
-				// GitHub is rendering as:
-				// <pre><code>code block
-				// </code></pre>
-				'<pre><code>code block</code></pre>',
+				'<pre><code>code block\n' +
+				'</code></pre>',
 
 				// When converting back tabs are normalized to ```.
 				'```\n' +
@@ -71,13 +69,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'    code block',
 
-				// GitHub is rendering as:
-				// <pre><code>code block
-				// </code></pre>
-
-				'<pre><code>code block</code></pre>',
-
-				// When converting back tabs are normalized to ```.
+				'<pre><code>code block\n' +
+				'</code></pre>',
 
 				'```\n' +
 				'code block\n' +
@@ -90,15 +83,9 @@ describe( 'GFMDataProcessor', () => {
 				'	first line\n' +
 				'	second line',
 
-				// GitHub is rendering as:
-				// <pre><code>first line
-				// second line
-				// </code></pre>
-
 				'<pre><code>first line\n' +
-				'second line</code></pre>',
-
-				// When converting back tabs are normalized to ```.
+				'second line\n' +
+				'</code></pre>',
 
 				'```\n' +
 				'first line\n' +
@@ -112,15 +99,9 @@ describe( 'GFMDataProcessor', () => {
 				'    first line\n' +
 				'    second line',
 
-				// GitHub is rendering as:
-				// <pre><code>first line
-				// second line
-				// </code></pre>
-
 				'<pre><code>first line\n' +
-				'second line</code></pre>',
-
-				// When converting back spaces are normalized to ```.
+				'second line\n' +
+				'</code></pre>',
 
 				'```\n' +
 				'first line\n' +
@@ -140,7 +121,8 @@ describe( 'GFMDataProcessor', () => {
 				// </code></pre>
 
 				'<pre><code>the lines in this block  \n' +
-				'all contain trailing spaces  </code></pre>',
+				'all contain trailing spaces  \n' +
+				'</code></pre>',
 
 				// When converting back tabs are normalized to ```, while the test function remove trailing spaces.
 				'```\n' +
@@ -161,7 +143,8 @@ describe( 'GFMDataProcessor', () => {
 				// We will need to handle this separately by some feature.
 
 				'<pre><code class="language-js">var a = \'hello\';\n' +
-				'console.log(a + \' world\');</code></pre>'
+				'console.log(a + \' world\');\n' +
+				'</code></pre>'
 			);
 		} );
 
@@ -174,7 +157,8 @@ describe( 'GFMDataProcessor', () => {
 				// GitHub is rendering as special html with syntax highlighting.
 				// We will need to handle this separately by some feature.
 
-				'<pre><code class="language-bash">#!/bin/bash</code></pre>',
+				'<pre><code class="language-bash">#!/bin/bash\n' +
+				'</code></pre>',
 
 				// When converting back ~~~ are normalized to ```.
 
@@ -195,7 +179,8 @@ describe( 'GFMDataProcessor', () => {
 				// We will need to handle this separately by some feature.
 
 				'<pre><code class="language-js">var a = \'hello\';\n' +
-				'console.log(a + \' world\');</code></pre>',
+				'console.log(a + \' world\');\n' +
+				'</code></pre>',
 
 				// When converting back ``````` are normalized to ```.
 
@@ -217,7 +202,8 @@ describe( 'GFMDataProcessor', () => {
 				// We will need to handle this separately by some feature.
 
 				'<pre><code class="language-js">var a = \'hello\';\n' +
-				'console.log(a + \' world\');</code></pre>',
+				'console.log(a + \' world\');\n' +
+				'</code></pre>',
 
 				// When converting back ~~~~~~~~~~ are normalized to ```.
 
@@ -236,7 +222,8 @@ describe( 'GFMDataProcessor', () => {
 				// GitHub is rendering as special html with syntax highlighting.
 				// We will need to handle this separately by some feature.
 
-				'<pre><code class="language-js"></code></pre>',
+				'<pre><code class="language-js">\n' +
+				'</code></pre>',
 
 				// When converting back, empty code blocks will be removed.
 				// This might be an issue when switching from source to editor
@@ -254,7 +241,8 @@ describe( 'GFMDataProcessor', () => {
 				// GitHub is rendering as special html with syntax highlighting.
 				// We will need to handle this separately by some feature.
 
-				'<pre><code class="language-js"></code></pre>',
+				'<pre><code class="language-js">\n' +
+				'</code></pre>',
 
 				// When converting back, empty code blocks will be removed.
 				// This might be an issue when switching from source to editor
@@ -288,7 +276,7 @@ describe( 'GFMDataProcessor', () => {
 				'<pre><code>' +
 				'```\n' +
 				'Code\n' +
-				'```' +
+				'```\n' +
 				'</code></pre>'
 			);
 		} );
@@ -308,7 +296,7 @@ describe( 'GFMDataProcessor', () => {
 				'```\n' +
 				'Code\n' +
 				'```\n' +
-				'````' +
+				'````\n' +
 				'</code></pre>'
 			);
 		} );
@@ -339,7 +327,7 @@ describe( 'GFMDataProcessor', () => {
 			expect( viewFragment.getChild( 0 ).getChild( 0 ).getCustomProperty( '$rawContent' ) ).to.equal(
 				[
 					'var a = \'hello\';',
-					'console.log(a + \' world\');'
+					'console.log(a + \' world\');\n'
 				].join( '\n' )
 			);
 		} );

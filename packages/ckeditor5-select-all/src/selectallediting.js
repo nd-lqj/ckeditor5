@@ -7,7 +7,7 @@
  * @module select-all/selectallediting
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import { getCode, parseKeystroke } from '@ckeditor/ckeditor5-utils/src/keyboard';
 import SelectAllCommand from './selectallcommand';
 

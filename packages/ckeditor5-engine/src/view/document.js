@@ -7,11 +7,9 @@
  * @module engine/view/document
  */
 
+import { Collection, mix, ObservableMixin } from 'ckeditor5/src/utils';
 import DocumentSelection from './documentselection';
-import Collection from '@ckeditor/ckeditor5-utils/src/collection';
-import mix from '@ckeditor/ckeditor5-utils/src/mix';
 import BubblingEmitterMixin from './observer/bubblingemittermixin';
-import ObservableMixin from '@ckeditor/ckeditor5-utils/src/observablemixin';
 
 // @if CK_DEBUG_ENGINE // const { logDocument } = require( '../dev-utils/utils' );
 

@@ -12,10 +12,8 @@
   ],
   "main": "src/index.js",
   "dependencies": {
-    "@ckeditor/ckeditor5-core": "^28.0.0",
-    "@ckeditor/ckeditor5-engine": "^28.0.0",
     "@ckeditor/ckeditor5-utils": "^28.0.0",
-    "@ckeditor/ckeditor5-widget": "^28.0.0",
+    "ckeditor5": "^28.0.0",
     "lodash-es": "^4.17.11"
   },
   "devDependencies": {
@@ -24,8 +22,10 @@
     "@ckeditor/ckeditor5-block-quote": "^28.0.0",
     "@ckeditor/ckeditor5-cloud-services": "^28.0.0",
     "@ckeditor/ckeditor5-code-block": "^28.0.0",
+    "@ckeditor/ckeditor5-core": "^28.0.0",
     "@ckeditor/ckeditor5-easy-image": "^28.0.0",
     "@ckeditor/ckeditor5-editor-classic": "^28.0.0",
+    "@ckeditor/ckeditor5-engine": "^28.0.0",
     "@ckeditor/ckeditor5-enter": "^28.0.0",
     "@ckeditor/ckeditor5-horizontal-line": "^28.0.0",
     "@ckeditor/ckeditor5-image": "^28.0.0",
@@ -35,7 +35,8 @@
     "@ckeditor/ckeditor5-paste-from-office": "^28.0.0",
     "@ckeditor/ckeditor5-remove-format": "^28.0.0",
     "@ckeditor/ckeditor5-table": "^28.0.0",
-    "@ckeditor/ckeditor5-typing": "^28.0.0"
+    "@ckeditor/ckeditor5-typing": "^28.0.0",
+    "@ckeditor/ckeditor5-widget": "^28.0.0"
   },
   "engines": {
     "node": ">=12.0.0",

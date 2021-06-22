@@ -27,7 +27,7 @@ import DocumentSelection from './documentselection';
 
 import toMap from '@ckeditor/ckeditor5-utils/src/tomap';
 
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 
 /**
  * The model can only be modified by using the writer. It should be used whenever you want to create a node, modify

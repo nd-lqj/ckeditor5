@@ -10,7 +10,7 @@
 import TreeWalker from './treewalker';
 
 import compareArrays from '@ckeditor/ckeditor5-utils/src/comparearrays';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import EditableElement from './editableelement';
 
 // To check if component is loaded more than once.

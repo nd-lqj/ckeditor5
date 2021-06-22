@@ -18,7 +18,7 @@ import DocumentSelection from '../model/documentselection';
 import ConversionHelpers from './conversionhelpers';
 
 import { cloneDeep } from 'lodash-es';
-import CKEditorError from '@ckeditor/ckeditor5-utils/src/ckeditorerror';
+import { CKEditorError } from 'ckeditor5/src/utils';
 import toArray from '@ckeditor/ckeditor5-utils/src/toarray';
 
 /**

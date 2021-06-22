@@ -9,7 +9,7 @@
  * @module widget/widgettypearound
  */
 
-import Plugin from '@ckeditor/ckeditor5-core/src/plugin';
+import { Plugin } from 'ckeditor5/src/core';
 import Template from '@ckeditor/ckeditor5-ui/src/template';
 import Enter from '@ckeditor/ckeditor5-enter/src/enter';
 import Delete from '@ckeditor/ckeditor5-typing/src/delete';
