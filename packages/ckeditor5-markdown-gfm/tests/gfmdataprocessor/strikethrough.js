@@ -7,19 +7,35 @@ import { testDataProcessor } from '../_utils/utils';
 
 describe( 'GFMDataProcessor', () => {
 	describe( 'Strikethrough', () => {
-		it( 'should process strikethrough text', () => {
+		it( 'should process strikethrough text #1', () => {
 			testDataProcessor(
 				'~deleted~',
-
-				'<p><del>deleted</del></p>'
+				'<p><del>deleted</del></p>',
+				'~~deleted~~\n'
 			);
 		} );
 
-		it( 'should process strikethrough inside text', () => {
+		it( 'should process strikethrough text #2', () => {
+			testDataProcessor(
+				'~~deleted~~',
+				'<p><del>deleted</del></p>',
+				'~~deleted~~\n'
+			);
+		} );
+
+		it( 'should process strikethrough inside text #1', () => {
 			testDataProcessor(
 				'This is ~deleted content~.',
+				'<p>This is <del>deleted content</del>.</p>',
+				'This is ~~deleted content~~.\n'
+			);
+		} );
 
-				'<p>This is <del>deleted content</del>.</p>'
+		it( 'should process strikethrough inside text #2', () => {
+			testDataProcessor(
+				'This is ~~deleted content~~.',
+				'<p>This is <del>deleted content</del>.</p>',
+				'This is ~~deleted content~~.\n'
 			);
 		} );
 	} );

@@ -10,8 +10,8 @@ describe( 'GFMDataProcessor', () => {
 		it( 'should process oembed', () => {
 			testDataProcessor(
 				'[!oembed](http://example.com/video.mp4)',
-
-				'<figure class="media"><oembed url="http://example.com/video.mp4"></oembed></figure>'
+				'<figure class="media"><oembed url="http://example.com/video.mp4"></oembed></figure>',
+				'[!oembed](http://example.com/video.mp4)\n'
 			);
 		} );
 	} );

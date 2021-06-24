@@ -13,6 +13,7 @@ import rehype2remark from 'rehype-remark';
 import gfm from 'remark-gfm';
 import stringify from 'remark-stringify';
 import { u } from 'unist-builder';
+import { visit } from 'unist-util-visit';
 
 const processor = unified()
 	.use( parse )
@@ -32,8 +33,41 @@ const processor = unified()
 			}
 		}
 	} )
-	.use( gfm )
-	.use( stringify )
+	.use( gfm, {
+		singleTilde: false
+	} )
+	.use( function spread() {
+		return transformer;
+
+		function transformer( tree ) {
+			visit( tree, [ 'list', 'listItem' ], ( listOrItem, index, parent ) => {
+				if ( listOrItem.spread ) {
+					parent.children.splice(
+						index,
+						1,
+						{
+							...listOrItem,
+							spread: false
+						}
+					);
+
+					return [ visit.SKIP, index ];
+				}
+			} );
+		}
+	} )
+	.use( stringify, {
+		fences: true,
+		// join: [ (
+		// 	left,
+		// 	right,
+		// 	parent,
+		// 	context
+		// ) => {
+		// 	return 0;
+		// } ],
+		rule: '-'
+	} )
 	.freeze();
 
 /**

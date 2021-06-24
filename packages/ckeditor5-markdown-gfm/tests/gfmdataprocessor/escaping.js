@@ -3,9 +3,10 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
+import { StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
+import { stringify } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 import MarkdownDataProcessor from '../../src/gfmdataprocessor';
 import { testDataProcessor } from '../../tests/_utils/utils';
-import { stringify, StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
 
 const testCases = {
 	'backslash': { test: '\\\\', result: '\\' },

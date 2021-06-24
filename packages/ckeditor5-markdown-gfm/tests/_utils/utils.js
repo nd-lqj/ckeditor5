@@ -3,7 +3,8 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-import { stringify, StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
+import { StylesProcessor, ViewDocument } from 'ckeditor5/src/engine';
+import { stringify } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 import MarkdownDataProcessor from '../../src/gfmdataprocessor';
 
 /**

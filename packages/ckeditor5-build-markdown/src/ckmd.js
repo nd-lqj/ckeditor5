@@ -35,7 +35,6 @@ import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-import TodoList from '@ckeditor/ckeditor5-list/src/todolist';
 
 import html2markdown from '@ckeditor/ckeditor5-markdown-gfm/src/html2markdown';
 import markdown2html from '@ckeditor/ckeditor5-markdown-gfm/src/markdown2html';
@@ -78,7 +77,6 @@ CKMD.builtinPlugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	TodoList,
 
 	/**
 	 * extra plugins
@@ -109,7 +107,6 @@ CKMD.defaultConfig = {
 			'|',
 			'bulletedList',
 			'numberedList',
-			'todoList',
 			'indent',
 			'outdent',
 			'|',

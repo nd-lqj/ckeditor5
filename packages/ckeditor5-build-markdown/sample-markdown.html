@@ -54,6 +54,9 @@
 			white-space: pre-wrap;
 			word-break: break-word;
 		}
+		#preview li > p {
+			margin: 0;
+		}
 	</style>
 </head>
 <body>
@@ -202,7 +205,6 @@ CKMD
 		const checkbox = document.querySelector('#toggle-' + index);
 
 		checkbox.addEventListener('change', (e) => {
-			console.log(e);
 			const el = document.querySelector('main > section:nth-child(' + index + ')');
 
 			if (!e.target.checked) {

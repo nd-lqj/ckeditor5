@@ -11,16 +11,11 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'+ this is a list item indented with tabs',
 
-				// GitHub will render it as (notice two spaces at the beginning of the list item):
-				// <ul>
-				// <li>  this is a list item indented with tabs</li>
-				// </ul>
 				'<ul>' +
 				'<li>this is a list item indented with tabs</li>' +
 				'</ul>',
 
-				// After converting back list will be normalized to *.
-				'* this is a list item indented with tabs'
+				'*   this is a list item indented with tabs\n'
 			);
 		} );
 
@@ -28,16 +23,11 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'+   this is a list item indented with spaces',
 
-				// GitHub will render it as (notice two spaces at the beginning of the list item):
-				// <ul>
-				// <li>  this is a list item indented with spaces</li>
-				// </ul>
 				'<ul>' +
 				'<li>this is a list item indented with spaces</li>' +
 				'</ul>',
 
-				// After converting back list will be normalized to *.
-				'* this is a list item indented with spaces'
+				'*   this is a list item indented with spaces\n'
 			);
 		} );
 
@@ -48,10 +38,9 @@ describe( 'GFMDataProcessor', () => {
 				'<pre><code>this code block is indented by one tab\n' +
 				'</code></pre>',
 
-				// After converting back code block will be normalized to ``` representation.
 				'```\n' +
 				'this code block is indented by one tab\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -62,10 +51,9 @@ describe( 'GFMDataProcessor', () => {
 				'<pre><code>\tthis code block is indented by two tabs\n' +
 				'</code></pre>',
 
-				// After converting back code block will be normalized to ``` representation.
 				'```\n' +
-				'    this code block is indented by two tabs\n' +
-				'```'
+				'\tthis code block is indented by two tabs\n' +
+				'```\n'
 			);
 		} );
 
@@ -78,8 +66,10 @@ describe( 'GFMDataProcessor', () => {
 				'next line\n' +
 				'</code></pre>',
 
+				'```\n' +
 				'+\tlist item\n' +
-				'    next line\n'
+				'next line\n' +
+				'```\n'
 			);
 		} );
 	} );

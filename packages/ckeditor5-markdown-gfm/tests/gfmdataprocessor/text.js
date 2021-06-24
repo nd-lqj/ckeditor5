@@ -91,20 +91,6 @@ describe( 'GFMDataProcessor', () => {
 					'http\\://\'\'\'\'\'\'\'\'\'\'\'\'\n'
 				);
 			} );
-
-			// [
-			// 	'https://test.com/do_[not]-escape',
-			// 	'http://test.com/do_[not]-escape',
-			// 	'www.test.com/do_[not]-escape',
-			// 	'www.test.com/foobar.html~~',
-			// 	'www.test.com/foobar((v2)))',
-			// 	'www.test.com/foobar(v2))',
-			// 	'www.test.com/foobar((v2)'
-			// ].forEach( url => {
-			// 	it( `should not(?) escape urls (${ url })`, () => {
-			// 		testDataProcessor( url, `<p><a href="${ url }"><a>${ url }</a></p>` );
-			// 	} );
-			// } );
 		} );
 	} );
 } );

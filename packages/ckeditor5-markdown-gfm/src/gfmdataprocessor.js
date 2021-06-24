@@ -36,18 +36,6 @@ export default class GFMDataProcessor {
 	}
 
 	/**
-	 * Keeps the specified element in the output as HTML. This is useful if the editor contains
-	 * features producing HTML that is not a part of the Markdown standard.
-	 *
-	 * By default, all HTML tags are removed.
-	 *
-	 * @param element {String} The element name to be kept.
-	 */
-	// keepHtml( element ) {
-	// 	turndownService.keep( [ element ] );
-	// }
-
-	/**
 	 * Converts the provided Markdown string to a view tree.
 	 *
 	 * @param {String} data A Markdown string.

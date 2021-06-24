@@ -345,7 +345,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="/url">hi</a></p>',
 
-				'[hi](/url)'
+				'[hi](/url)\n'
 			);
 		} );
 	} );

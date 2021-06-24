@@ -25,6 +25,22 @@ describe( 'html2markdown', () => {
 		);
 	} );
 
+	it( 'horizontal-rule work #1', () => {
+		expect( html2markdown(
+			'<hr/>'
+		) ).to.equal(
+			'---\n'
+		);
+	} );
+
+	it( 'horizontal-rule work #2', () => {
+		expect( html2markdown(
+			'<hr>'
+		) ).to.equal(
+			'---\n'
+		);
+	} );
+
 	it( 'basic-styles work #1', () => {
 		expect( html2markdown(
 			'<p><strong>Test:strong</strong><em>Test:i</em></p>'
@@ -70,9 +86,11 @@ describe( 'html2markdown', () => {
 
 	it( 'code-block works #1', () => {
 		expect( html2markdown(
-			'<pre><code>foo\n</code></pre>'
+			'<pre><code>\tfoo\n</code></pre>'
 		) ).to.equal(
-			'    foo\n'
+			'```\n' +
+			'\tfoo\n' +
+			'```\n'
 		);
 	} );
 
@@ -80,8 +98,10 @@ describe( 'html2markdown', () => {
 		expect( html2markdown(
 			'<pre><code>foo\nbar\n</code></pre>'
 		) ).to.equal(
-			'    foo\n' +
-			'    bar\n'
+			'```\n' +
+			'foo\n' +
+			'bar\n' +
+			'```\n'
 		);
 	} );
 
@@ -163,6 +183,61 @@ describe( 'html2markdown', () => {
 			'*   Item 1.\n' +
 			'*   1.  Item 1.\n' +
 			'    2.  Item 2.\n'
+		);
+	} );
+
+	it( 'list works #3', () => {
+		expect( html2markdown(
+			'<ol>\n' +
+				'<li>Soyuz (Soviet/Russian)\n' +
+					'<ol>\n' +
+						'<li>Early stage (all retired)\n' +
+							'<ul>\n' +
+								'<li>7K-OK</li>\n' +
+								'<li>7KT-OK</li>\n' +
+								'<li>7K-T</li>\n' +
+								'<li>7K-TM</li>\n' +
+							'</ul>\n' +
+						'</li>\n' +
+						'<li>Soyuz T (retired)</li>\n' +
+						'<li>Soyuz TM (retired)</li>\n' +
+						'<li>Soyuz TMA (retired)</li>\n' +
+						'<li>Soyuz TMA-M (retired)</li>\n' +
+						'<li>Soyuz MS</li>\n' +
+					'</ol>\n' +
+				'</li>\n' +
+				'<li>STS orbiter (American; all retired)\n' +
+					'<ul>\n' +
+						'<li>Columbia</li>\n' +
+						'<li>Challenger</li>\n' +
+						'<li>Discovery</li>\n' +
+						'<li>Atlantis</li>\n' +
+						'<li>Endeavour</li>\n' +
+					'</ul>\n' +
+				'</li>\n' +
+				'<li>SpaceX Crew Dragon (American)</li>\n' +
+				'<li>Shenzhou (Chinese)</li>\n' +
+			'</ol>'
+		) ).to.equal(
+			'1.  Soyuz (Soviet/Russian)\n' +
+			'    1.  Early stage (all retired)\n' +
+			'        *   7K-OK\n' +
+			'        *   7KT-OK\n' +
+			'        *   7K-T\n' +
+			'        *   7K-TM\n' +
+			'    2.  Soyuz T (retired)\n' +
+			'    3.  Soyuz TM (retired)\n' +
+			'    4.  Soyuz TMA (retired)\n' +
+			'    5.  Soyuz TMA-M (retired)\n' +
+			'    6.  Soyuz MS\n' +
+			'2.  STS orbiter (American; all retired)\n' +
+			'    *   Columbia\n' +
+			'    *   Challenger\n' +
+			'    *   Discovery\n' +
+			'    *   Atlantis\n' +
+			'    *   Endeavour\n' +
+			'3.  SpaceX Crew Dragon (American)\n' +
+			'4.  Shenzhou (Chinese)\n'
 		);
 	} );
 

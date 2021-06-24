@@ -10,8 +10,8 @@ describe( 'GFMDataProcessor', () => {
 		it( 'single line', () => {
 			testDataProcessor(
 				'single line paragraph',
-
-				'<p>single line paragraph</p>'
+				'<p>single line paragraph</p>',
+				'single line paragraph\n'
 			);
 		} );
 
@@ -21,11 +21,9 @@ describe( 'GFMDataProcessor', () => {
 				'second\n' +
 				'third',
 
-				// GitHub is rendering as:
-				// <p>first<br>
-				// second<br>
-				// third</p>
-				'<p>first<br></br>second<br></br>third</p>'
+				'<p>first second third</p>',
+
+				'first second third\n'
 			);
 		} );
 
@@ -34,15 +32,12 @@ describe( 'GFMDataProcessor', () => {
 				'single line\n' +
 				'# header',
 
-				// GitHub is rendering as:
-				// <p>single line</p>
-				//
-				// <h1>header</h1>
-				'<p>single line</p><h1>header</h1>',
+				'<p>single line</p>' +
+				'<h1>header</h1>',
 
 				'single line\n' +
 				'\n' +
-				'# header'
+				'# header\n'
 			);
 		} );
 
@@ -51,17 +46,12 @@ describe( 'GFMDataProcessor', () => {
 				'single line' +
 				'\n> quote',
 
-				// GitHub is rendereing as:
-				// <p>single line</p>
-				//
-				// <blockquote>
-				// <p>quote</p>
-				// </blockquote>
-				'<p>single line</p><blockquote><p>quote</p></blockquote>',
+				'<p>single line</p>' +
+				'<blockquote><p>quote</p></blockquote>',
 
 				'single line' +
 				'\n' +
-				'\n> quote'
+				'\n> quote\n'
 			);
 		} );
 
@@ -70,11 +60,12 @@ describe( 'GFMDataProcessor', () => {
 				'single line\n' +
 				'*   item',
 
-				'<p>single line</p><ul><li>item</li></ul>',
+				'<p>single line</p>' +
+				'<ul><li>item</li></ul>',
 
 				'single line\n' +
 				'\n' +
-				'* item'
+				'*   item\n'
 			);
 		} );
 	} );
