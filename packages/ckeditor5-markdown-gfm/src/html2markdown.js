@@ -8,16 +8,26 @@
  */
 
 import unified from 'unified';
-import parse from 'rehype-parse';
-import rehype2remark from 'rehype-remark';
-import gfm from 'remark-gfm';
-import stringify from 'remark-stringify';
+import { fromParse5 } from 'hast-util-from-parse5';
+import { toMdast } from 'hast-util-to-mdast';
+import { gfmToMarkdown } from 'mdast-util-gfm';
+import { toMarkdown } from 'mdast-util-to-markdown';
+import { parse as parse5 } from 'parse5';
 import { u } from 'unist-builder';
-import { visit } from 'unist-util-visit';
 
 const processor = unified()
-	.use( parse )
-	.use( rehype2remark, {
+	.use( function parse( options ) {
+		this.Parser = doc => {
+			return fromParse5( parse5( doc, options ) );
+		};
+	}, {
+		scriptingEnabled: false
+	} )
+	.use( function hast2mdast( options ) {
+		return tree => {
+			return toMdast( tree, options );
+		};
+	}, {
 		handlers: {
 			oembed: ( h, node ) => {
 				return h(
@@ -33,40 +43,19 @@ const processor = unified()
 			}
 		}
 	} )
-	.use( gfm, {
-		singleTilde: false
-	} )
-	.use( function spread() {
-		return transformer;
-
-		function transformer( tree ) {
-			visit( tree, [ 'list', 'listItem' ], ( listOrItem, index, parent ) => {
-				if ( listOrItem.spread ) {
-					parent.children.splice(
-						index,
-						1,
-						{
-							...listOrItem,
-							spread: false
-						}
-					);
-
-					return [ visit.SKIP, index ];
-				}
-			} );
-		}
-	} )
-	.use( stringify, {
+	.use( function stringify( options ) {
+		this.Compiler = tree => {
+			return toMarkdown( tree, options );
+		};
+	}, {
 		fences: true,
-		// join: [ (
-		// 	left,
-		// 	right,
-		// 	parent,
-		// 	context
-		// ) => {
-		// 	return 0;
-		// } ],
-		rule: '-'
+		join: [ ( left, right, parent ) => {
+			if ( parent.spread && ( left.type === 'listItem' || right.type === 'list' ) ) {
+				return 0;
+			}
+		} ],
+		rule: '-',
+		extensions: [ gfmToMarkdown() ]
 	} )
 	.freeze();
 

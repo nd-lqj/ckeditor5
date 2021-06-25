@@ -11,19 +11,19 @@ describe( 'GFMDataProcessor', () => {
 	describe( 'horizontal rules', () => {
 		describe( 'dashes', () => {
 			it( '#1', () => {
-				testDataProcessor( '---', '<hr></hr>', '---' );
+				testDataProcessor( '---', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' ---', '<hr></hr>', '---' );
+				testDataProcessor( ' ---', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  ---', '<hr></hr>', '---' );
+				testDataProcessor( '  ---', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   ---', '<hr></hr>', '---' );
+				testDataProcessor( '   ---', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -37,26 +37,26 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'---\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );
 
 		describe( 'dashes with spaces', () => {
 			it( '#1', () => {
-				testDataProcessor( '- - -', '<hr></hr>', '---' );
+				testDataProcessor( '- - -', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' - - -', '<hr></hr>', '---' );
+				testDataProcessor( ' - - -', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  - - -', '<hr></hr>', '---' );
+				testDataProcessor( '  - - -', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   - - -', '<hr></hr>', '---' );
+				testDataProcessor( '   - - -', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -70,26 +70,26 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'- - -\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );
 
 		describe( 'asterisks', () => {
 			it( '#1', () => {
-				testDataProcessor( '***', '<hr></hr>', '---' );
+				testDataProcessor( '***', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' ***', '<hr></hr>', '---' );
+				testDataProcessor( ' ***', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  ***', '<hr></hr>', '---' );
+				testDataProcessor( '  ***', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   ***', '<hr></hr>', '---' );
+				testDataProcessor( '   ***', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -103,26 +103,26 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'***\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );
 
 		describe( 'asterisks with spaces', () => {
 			it( '#1', () => {
-				testDataProcessor( '* * *', '<hr></hr>', '---' );
+				testDataProcessor( '* * *', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' * * *', '<hr></hr>', '---' );
+				testDataProcessor( ' * * *', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  * * *', '<hr></hr>', '---' );
+				testDataProcessor( '  * * *', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   * * *', '<hr></hr>', '---' );
+				testDataProcessor( '   * * *', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -136,26 +136,26 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'* * *\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );
 
 		describe( 'underscores', () => {
 			it( '#1', () => {
-				testDataProcessor( '___', '<hr></hr>', '---' );
+				testDataProcessor( '___', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' ___', '<hr></hr>', '---' );
+				testDataProcessor( ' ___', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  ___', '<hr></hr>', '---' );
+				testDataProcessor( '  ___', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   ___', '<hr></hr>', '---' );
+				testDataProcessor( '   ___', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -169,26 +169,26 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'___\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );
 
 		describe( 'underscores with spaces', () => {
 			it( '#1', () => {
-				testDataProcessor( '_ _ _', '<hr></hr>', '---' );
+				testDataProcessor( '_ _ _', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#2', () => {
-				testDataProcessor( ' _ _ _', '<hr></hr>', '---' );
+				testDataProcessor( ' _ _ _', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#3', () => {
-				testDataProcessor( '  _ _ _', '<hr></hr>', '---' );
+				testDataProcessor( '  _ _ _', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#4', () => {
-				testDataProcessor( '   _ _ _', '<hr></hr>', '---' );
+				testDataProcessor( '   _ _ _', '<hr></hr>', '---\n' );
 			} );
 
 			it( '#5 - code', () => {
@@ -202,7 +202,7 @@ describe( 'GFMDataProcessor', () => {
 					// Code block will be normalized to ``` representation.
 					'```\n' +
 					'_ _ _\n' +
-					'```'
+					'```\n'
 				);
 			} );
 		} );

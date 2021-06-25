@@ -7,113 +7,156 @@ import { testDataProcessor } from '../_utils/utils';
 
 describe( 'GFMDataProcessor', () => {
 	describe( 'links', () => {
-		it( 'should not autolink', () => {
+		it( 'should autolink', () => {
 			testDataProcessor(
 				'Link: http://example.com/.',
-				'<p>Link: http://example.com/.</p>'
+
+				'<p>Link: <a href="http://example.com/">http://example.com/</a>.</p>',
+
+				'Link: <http://example.com/>.\n'
 			);
 		} );
 
-		it( 'should not autolink with params', () => {
+		it( 'should autolink with params', () => {
 			testDataProcessor(
 				'Link: http://example.com/?foo=1&bar=2.',
-				'<p>Link: http://example.com/?foo=1&bar=2.</p>'
+
+				'<p>Link: <a href="http://example.com/?foo=1&bar=2">http://example.com/?foo=1&bar=2</a>.</p>',
+
+				'Link: <http://example.com/?foo=1&bar=2>.\n'
 			);
 		} );
 
-		it( 'should not autolink inside list', () => {
+		it( 'should autolink inside list', () => {
 			testDataProcessor(
 				'*   http://example.com/',
-				'<ul><li>http://example.com/</li></ul>',
-				'* http://example.com/'
+
+				'<ul>' +
+					'<li>' +
+						'<a href="http://example.com/">http://example.com/</a>' +
+					'</li>' +
+				'</ul>',
+
+				'*   <http://example.com/>\n'
 			);
 		} );
 
-		it( 'should not autolink inside blockquote', () => {
+		it( 'should autolink inside blockquote', () => {
 			testDataProcessor(
 				'> Blockquoted: http://example.com/',
 
 				'<blockquote>' +
-				'<p>Blockquoted: http://example.com/</p>' +
-				'</blockquote>'
+					'<p>Blockquoted: <a href="http://example.com/">http://example.com/</a></p>' +
+				'</blockquote>',
+
+				'> Blockquoted: <http://example.com/>\n'
 			);
 		} );
 
-		it( 'should not autolink inside inline code', () => {
+		it( 'should autolink inside inline code', () => {
 			testDataProcessor(
 				'`<http://example.com/>`',
-				'<p><code><http://example.com/></code></p>'
+
+				'<p><code><http://example.com/></code></p>',
+
+				'`<http://example.com/>`\n'
 			);
 		} );
 
 		it( 'should not autolink inside code block', () => {
 			testDataProcessor(
 				'	<http://example.com/>',
+
 				'<pre><code><http://example.com/>\n' +
 				'</code></pre>',
 
 				// When converting back, code block will be normalized to ```.
 				'```\n' +
 				'<http://example.com/>\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
 		it( 'should not process already linked #1', () => {
 			testDataProcessor(
 				'Already linked: [http://example.com/](http://example.com/)',
-				'<p>Already linked: <a href="http://example.com/">http://example.com/</a></p>'
+
+				'<p>Already linked: <a href="http://example.com/">http://example.com/</a></p>',
+
+				'Already linked: <http://example.com/>\n'
 			);
 		} );
 
 		it( 'should not process already linked #2', () => {
 			testDataProcessor(
 				'Already linked: [**http://example.com/**](http://example.com/)',
-				'<p>Already linked: <a href="http://example.com/"><strong>http://example.com/</strong></a></p>'
+
+				'<p>Already linked: <a href="http://example.com/"><strong>http://example.com/</strong></a></p>',
+
+				'Already linked: [**http://example.com/**](http://example.com/)\n'
+			);
+		} );
+
+		it( 'should not process already linked #3', () => {
+			testDataProcessor(
+				'Already linked: <http://example.com/>',
+
+				'<p>Already linked: <a href="http://example.com/">http://example.com/</a></p>',
+
+				'Already linked: <http://example.com/>\n'
 			);
 		} );
 
 		it( 'should process inline links', () => {
 			testDataProcessor(
 				'[URL](/url/)',
-				'<p><a href="/url/">URL</a></p>'
+
+				'<p><a href="/url/">URL</a></p>',
+
+				'[URL](/url/)\n'
 			);
 		} );
 
 		it( 'should process inline links with title', () => {
 			testDataProcessor(
 				'[URL and title](/url/ "title")',
-				'<p><a href="/url/" title="title">URL and title</a></p>'
+
+				'<p><a href="/url/" title="title">URL and title</a></p>',
+
+				'[URL and title](/url/ "title")\n'
 			);
 		} );
 
 		it( 'should process inline links with title preceded by two spaces', () => {
 			testDataProcessor(
 				'[URL and title](/url/  "title preceded by two spaces")',
+
 				'<p><a href="/url/" title="title preceded by two spaces">URL and title</a></p>',
 
 				// When converting back spaces will be normalized to one space.
-				'[URL and title](/url/ "title preceded by two spaces")'
+				'[URL and title](/url/ "title preceded by two spaces")\n'
 			);
 		} );
 
 		it( 'should process inline links with title preceded by tab', () => {
 			testDataProcessor(
 				'[URL and title](/url/	"title preceded by tab")',
+
 				'<p><a href="/url/" title="title preceded by tab">URL and title</a></p>',
 
 				// When converting back tab will be normalized to one space.
-				'[URL and title](/url/ "title preceded by tab")'
+				'[URL and title](/url/ "title preceded by tab")\n'
 			);
 		} );
 
 		it( 'should process inline links with title that has spaces afterwards', () => {
 			testDataProcessor(
 				'[URL and title](/url/ "title has spaces afterward"  )',
+
 				'<p><a href="/url/" title="title has spaces afterward">URL and title</a></p>',
 
 				// When converting back spaces will be removed.
-				'[URL and title](/url/ "title has spaces afterward")'
+				'[URL and title](/url/ "title has spaces afterward")\n'
 			);
 		} );
 
@@ -134,7 +177,7 @@ describe( 'GFMDataProcessor', () => {
 
 				// After converting back reference links will be converted to normal links.
 				// This might be a problem when switching between source and editor.
-				'Foo [bar](/url/ "Title").'
+				'Foo [bar](/url/ "Title").\n'
 			);
 		} );
 
@@ -145,7 +188,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>Foo <a href="/url/" title="Title">bar</a>.</p>',
 
-				'Foo [bar](/url/ "Title").'
+				'Foo [bar](/url/ "Title").\n'
 			);
 		} );
 
@@ -156,7 +199,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>With <a href="/url/">embedded [brackets]</a>.</p>',
 
-				'With [embedded \\[brackets\\]](/url/).'
+				'With [embedded \\[brackets\\]](/url/).\n'
 			);
 		} );
 
@@ -167,7 +210,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>Indented <a href="/url">once</a>.</p>',
 
-				'Indented [once](/url).'
+				'Indented [once](/url).\n'
 			);
 		} );
 
@@ -178,7 +221,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>Indented <a href="/url">twice</a>.</p>',
 
-				'Indented [twice](/url).'
+				'Indented [twice](/url).\n'
 			);
 		} );
 
@@ -189,7 +232,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>Indented <a href="/url">trice</a>.</p>',
 
-				'Indented [trice](/url).'
+				'Indented [trice](/url).\n'
 			);
 		} );
 
@@ -200,7 +243,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="foo">this</a></p>',
 
-				'[this](foo)'
+				'[this](foo)\n'
 			);
 		} );
 
@@ -211,7 +254,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="foo">this</a></p>',
 
-				'[this](foo)'
+				'[this](foo)\n'
 			);
 		} );
 
@@ -222,7 +265,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="foo">this</a></p>',
 
-				'[this](foo)'
+				'[this](foo)\n'
 			);
 		} );
 
@@ -233,7 +276,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="foo">this</a></p>',
 
-				'[this](foo)'
+				'[this](foo)\n'
 			);
 		} );
 
@@ -244,7 +287,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="foo">this</a></p>',
 
-				'[this](foo)'
+				'[this](foo)\n'
 			);
 		} );
 
@@ -254,7 +297,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>[this][]</p>',
 
-				'\\[this\\]\\[\\]'
+				'\\[this]\\[]\n'
 			);
 		} );
 
@@ -264,7 +307,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>[this]</p>',
 
-				'\\[this\\]'
+				'\\[this]\n'
 			);
 		} );
 
@@ -275,7 +318,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>[a reference inside <a href="foo">this</a>]</p>',
 
-				'\\[a reference inside [this](foo)\\]'
+				'\\[a reference inside [this](foo)]\n'
 			);
 		} );
 
@@ -286,7 +329,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>[a reference inside <a href="foo">this</a>]</p>',
 
-				'\\[a reference inside [this](foo)\\]'
+				'\\[a reference inside [this](foo)]\n'
 			);
 		} );
 
@@ -297,7 +340,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><a href="/something/else/">this</a></p>',
 
-				'[this](/something/else/)'
+				'[this](/something/else/)\n'
 			);
 		} );
 
@@ -308,7 +351,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>Suppress [this] and [this].</p>',
 
-				'Suppress \\[this\\] and \\[this\\].'
+				'Suppress \\[this] and \\[this].\n'
 			);
 		} );
 
@@ -318,10 +361,9 @@ describe( 'GFMDataProcessor', () => {
 				'reference]\n\n' +
 				'[multiline reference]: foo',
 
-				'<p>This is <a href="foo">multiline<br></br>reference</a></p>',
+				'<p>This is <a href="foo">multiline reference</a></p>',
 
-				'This is [multiline\n' +
-				'reference](foo)'
+				'This is [multiline reference](foo)\n'
 			);
 		} );
 
@@ -331,10 +373,9 @@ describe( 'GFMDataProcessor', () => {
 				'reference]\n\n' +
 				'[multiline reference]: foo',
 
-				'<p>This is <a href="foo">multiline<br></br>reference</a></p>',
+				'<p>This is <a href="foo">multiline reference</a></p>',
 
-				'This is [multiline\n' +
-				'reference](foo)'
+				'This is [multiline reference](foo)\n'
 			);
 		} );
 

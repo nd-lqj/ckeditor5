@@ -11,10 +11,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'![alt text](http://example.com/image.png "title text")',
 
-				// GitHub is rendering as:
-				// <p><a href="..." target="_blank"><img src="..." alt="..." title="..." data-canonical-src="..."></a></p>
-				// We will handle images separately by features.
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png" title="title text"></img></figure>'
+				'<figure class="image"><img alt="alt text" src="http://example.com/image.png" title="title text"></img></figure>',
+
+				'![alt text](http://example.com/image.png "title text")\n'
 
 			);
 		} );
@@ -22,14 +21,20 @@ describe( 'GFMDataProcessor', () => {
 		it( 'should process images without title', () => {
 			testDataProcessor(
 				'![alt text](http://example.com/image.png)',
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png"></img></figure>'
+
+				'<figure class="image"><img alt="alt text" src="http://example.com/image.png"></img></figure>',
+
+				'![alt text](http://example.com/image.png)\n'
 			);
 		} );
 
 		it( 'should process images without alt text', () => {
 			testDataProcessor(
 				'![](http://example.com/image.png "title text")',
-				'<figure class="image"><img alt="" src="http://example.com/image.png" title="title text"></img></figure>'
+
+				'<figure class="image"><img alt="" src="http://example.com/image.png" title="title text"></img></figure>',
+
+				'![](http://example.com/image.png "title text")\n'
 			);
 		} );
 
@@ -41,7 +46,7 @@ describe( 'GFMDataProcessor', () => {
 				'<figure class="image"><img alt="alt text" src="http://example.com/image.png" title="title text"></img></figure>',
 
 				// Referenced images when converting back are converted to direct links.
-				'![alt text](http://example.com/image.png "title text")'
+				'![alt text](http://example.com/image.png "title text")\n'
 			);
 		} );
 
@@ -53,7 +58,7 @@ describe( 'GFMDataProcessor', () => {
 				'<figure class="image"><img alt="alt text" src="http://example.com/image.png"></img></figure>',
 
 				// Referenced images when converting back are converted to direct links.
-				'![alt text](http://example.com/image.png)'
+				'![alt text](http://example.com/image.png)\n'
 			);
 		} );
 
@@ -65,7 +70,7 @@ describe( 'GFMDataProcessor', () => {
 				'<figure class="image"><img alt="" src="http://example.com/image.png" title="title text"></img></figure>',
 
 				// Referenced images when converting back are converted to direct links.
-				'![](http://example.com/image.png "title text")'
+				'![](http://example.com/image.png "title text")\n'
 			);
 		} );
 	} );

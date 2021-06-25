@@ -77,16 +77,34 @@ describe( 'GFMDataProcessor', () => {
 			// contain the raw characters but we "know" that those are text nodes and therefore should be converted
 			// back to entities when outputting markdown.
 
-			it( 'should escape <', () => {
-				testDataProcessor( '\\<', '<p><</p>' );
+			it( 'should not escape <', () => {
+				testDataProcessor(
+					'\\<',
+
+					'<p><</p>',
+
+					'<\n'
+				);
 			} );
 
 			it( 'should escape HTML as text', () => {
-				testDataProcessor( '\\<h1>Test\\</h1>', '<p><h1>Test</h1></p>' );
+				testDataProcessor(
+					'\\<h1>Test\\</h1>',
+
+					'<p><h1>Test</h1></p>',
+
+					'\\<h1>Test\\</h1>\n'
+				);
 			} );
 
 			it( 'should not escape \\< inside inline code', () => {
-				testDataProcessor( '`\\<`', '<p><code>\\<</code></p>' );
+				testDataProcessor(
+					'`\\<`',
+
+					'<p><code>\\<</code></p>',
+
+					'`\\<`\n'
+				);
 			} );
 
 			it( 'should not touch escape-like HTML inside code blocks', () => {
@@ -94,14 +112,26 @@ describe( 'GFMDataProcessor', () => {
 					'```\n' +
 					'\\<h1>Test\\</h1>\n' +
 					'```',
+
 					'<pre><code>' +
 					'\\<h1>Test\\</h1>\n' +
-					'</code></pre>' );
+					'</code></pre>',
+
+					'```\n' +
+					'\\<h1>Test\\</h1>\n' +
+					'```\n'
+				);
 			} );
 
 			// Necessary test as we're overriding Turndown's escape(). Just to be sure.
 			it( 'should still escape markdown characters', () => {
-				testDataProcessor( '\\* \\_', '<p>* _</p>' );
+				testDataProcessor(
+					'\\* \\_',
+
+					'<p>* _</p>',
+
+					'\\* \\_\n'
+				);
 			} );
 		} );
 	} );

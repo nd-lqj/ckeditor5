@@ -11,7 +11,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'regular text and `inline code`',
 
-				'<p>regular text and <code>inline code</code></p>'
+				'<p>regular text and <code>inline code</code></p>',
+
+				'regular text and `inline code`\n'
 			);
 		} );
 
@@ -19,7 +21,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'`this is code` and this is `too`',
 
-				'<p><code>this is code</code> and this is <code>too</code></p>'
+				'<p><code>this is code</code> and this is <code>too</code></p>',
+
+				'`this is code` and this is `too`\n'
 			);
 		} );
 
@@ -29,9 +33,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p>regular text and<code> inline code</code></p>',
 
-				// When converting back it will be normalized and spaces
-				// at the beginning of inline code will be removed.
-				'regular text and `inline code`'
+				'regular text and` inline code`\n'
 			);
 		} );
 
@@ -39,7 +41,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'`` `backticks` ``',
 
-				'<p><code>`backticks`</code></p>'
+				'<p><code>`backticks`</code></p>',
+
+				'`` `backticks` ``\n'
 			);
 		} );
 
@@ -47,7 +51,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'``some `backticks` inside``',
 
-				'<p><code>some `backticks` inside</code></p>'
+				'<p><code>some `backticks` inside</code></p>',
+
+				'``some `backticks` inside``\n'
 			);
 		} );
 
@@ -58,10 +64,9 @@ describe( 'GFMDataProcessor', () => {
 				'<pre><code>code block\n' +
 				'</code></pre>',
 
-				// When converting back tabs are normalized to ```.
 				'```\n' +
 				'code block\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -74,7 +79,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'```\n' +
 				'code block\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -90,7 +95,7 @@ describe( 'GFMDataProcessor', () => {
 				'```\n' +
 				'first line\n' +
 				'second line\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -106,7 +111,7 @@ describe( 'GFMDataProcessor', () => {
 				'```\n' +
 				'first line\n' +
 				'second line\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -115,20 +120,14 @@ describe( 'GFMDataProcessor', () => {
 				'	the lines in this block  \n' +
 				'	all contain trailing spaces  ',
 
-				// GitHub is rendering as:
-				// <pre><code>the lines in this block
-				// all contain trailing spaces
-				// </code></pre>
-
 				'<pre><code>the lines in this block  \n' +
 				'all contain trailing spaces  \n' +
 				'</code></pre>',
 
-				// When converting back tabs are normalized to ```, while the test function remove trailing spaces.
 				'```\n' +
 				'the lines in this block\n' +
 				'all contain trailing spaces\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -139,12 +138,14 @@ describe( 'GFMDataProcessor', () => {
 				'console.log(a + \' world\');\n' +
 				'```',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
 				'<pre><code class="language-js">var a = \'hello\';\n' +
 				'console.log(a + \' world\');\n' +
-				'</code></pre>'
+				'</code></pre>',
+
+				'```js\n' +
+				'var a = \'hello\';\n' +
+				'console.log(a + \' world\');\n' +
+				'```\n'
 			);
 		} );
 
@@ -154,17 +155,12 @@ describe( 'GFMDataProcessor', () => {
 				'#!/bin/bash\n' +
 				'~~~',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
 				'<pre><code class="language-bash">#!/bin/bash\n' +
 				'</code></pre>',
 
-				// When converting back ~~~ are normalized to ```.
-
 				'```bash\n' +
 				'#!/bin/bash\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -175,19 +171,14 @@ describe( 'GFMDataProcessor', () => {
 				'console.log(a + \' world\');\n' +
 				'```````',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
 				'<pre><code class="language-js">var a = \'hello\';\n' +
 				'console.log(a + \' world\');\n' +
 				'</code></pre>',
 
-				// When converting back ``````` are normalized to ```.
-
 				'```js\n' +
 				'var a = \'hello\';\n' +
 				'console.log(a + \' world\');\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -198,19 +189,14 @@ describe( 'GFMDataProcessor', () => {
 				'console.log(a + \' world\');\n' +
 				'~~~~~~~~~~',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
 				'<pre><code class="language-js">var a = \'hello\';\n' +
 				'console.log(a + \' world\');\n' +
 				'</code></pre>',
 
-				// When converting back ~~~~~~~~~~ are normalized to ```.
-
 				'```js\n' +
 				'var a = \'hello\';\n' +
 				'console.log(a + \' world\');\n' +
-				'```'
+				'```\n'
 			);
 		} );
 
@@ -219,16 +205,11 @@ describe( 'GFMDataProcessor', () => {
 				'```js\n' +
 				'```',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
-				'<pre><code class="language-js">\n' +
+				'<pre><code class="language-js">' +
 				'</code></pre>',
 
-				// When converting back, empty code blocks will be removed.
-				// This might be an issue when switching from source to editor
-				// but changing this cannot be done in to-markdown converters.
-				''
+				'```js\n' +
+				'```\n'
 			);
 		} );
 
@@ -238,16 +219,11 @@ describe( 'GFMDataProcessor', () => {
 				'\n' +
 				'```',
 
-				// GitHub is rendering as special html with syntax highlighting.
-				// We will need to handle this separately by some feature.
-
-				'<pre><code class="language-js">\n' +
+				'<pre><code class="language-js">' +
 				'</code></pre>',
 
-				// When converting back, empty code blocks will be removed.
-				// This might be an issue when switching from source to editor
-				// but changing this cannot be done in to-markdown converters.
-				''
+				'```js\n' +
+				'```\n'
 			);
 		} );
 
@@ -255,13 +231,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'````` code `` code ``` `````',
 
-				// GitHub is rendering as:
-				// <p><code>code `` code ```</code></p>
-
 				'<p><code>code `` code ```</code></p>',
 
-				// When converting back ````` will be normalized to ``.
-				'`code `` code ``` `'
+				'`code `` code ``` `\n'
 			);
 		} );
 
@@ -277,7 +249,13 @@ describe( 'GFMDataProcessor', () => {
 				'```\n' +
 				'Code\n' +
 				'```\n' +
-				'</code></pre>'
+				'</code></pre>',
+
+				'````\n' +
+				'```\n' +
+				'Code\n' +
+				'```\n' +
+				'````\n'
 			);
 		} );
 
@@ -297,22 +275,29 @@ describe( 'GFMDataProcessor', () => {
 				'Code\n' +
 				'```\n' +
 				'````\n' +
-				'</code></pre>'
+				'</code></pre>',
+
+				'`````\n' +
+				'````\n' +
+				'```\n' +
+				'Code\n' +
+				'```\n' +
+				'````\n' +
+				'`````\n'
 			);
 		} );
 
 		it( 'should support #registerRawContentMatcher()', () => {
 			const viewFragment = testDataProcessor(
-				[
-					'```raw',
-					'var a = \'hello\';',
-					'console.log(a + \' world\');',
-					'```'
-				].join( '\n' ),
+				'```raw\n' +
+				'var a = \'hello\';\n' +
+				'console.log(a + \' world\');\n' +
+				'```',
 
 				'<pre><code class="language-raw"></code></pre>',
 
-				'',
+				'```raw\n' +
+				'```\n',
 
 				{
 					setup( processor ) {

@@ -11,12 +11,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'> foo bar',
 
-				// GitHub is rendering as:
-				//
-				// <blockquote>
-				// <p>foo bar</p>
-				// </blockquote>
-				'<blockquote><p>foo bar</p></blockquote>'
+				'<blockquote><p>foo bar</p></blockquote>',
+
+				'> foo bar\n'
 			);
 		} );
 
@@ -28,23 +25,19 @@ describe( 'GFMDataProcessor', () => {
 				'>\n' +
 				'> foo',
 
-				// GitHub is rendering as:
-				// <blockquote>
-				// <p>foo</p>
-				//
-				// <blockquote>
-				// <p>bar</p>
-				// </blockquote>
-				//
-				// <p>foo</p>
-				// </blockquote>
 				'<blockquote>' +
 					'<p>foo</p>' +
 					'<blockquote>' +
 						'<p>bar</p>' +
 					'</blockquote>' +
 					'<p>foo</p>' +
-				'</blockquote>'
+				'</blockquote>',
+
+				'> foo\n' +
+				'>\n' +
+				'> > bar\n' +
+				'>\n' +
+				'> foo\n'
 			);
 		} );
 
@@ -56,16 +49,6 @@ describe( 'GFMDataProcessor', () => {
 				'> * asterisk 2\n' +
 				'> * asterisk 3',
 
-				// GitHub is rendering as:
-				// <blockquote>
-				// <p>A list within a blockquote:</p>
-				//
-				// <ul>
-				// <li>asterisk 1</li>
-				// <li>asterisk 2</li>
-				// <li>asterisk 3</li>
-				// </ul>
-				// </blockquote>
 				'<blockquote>' +
 					'<p>A list within a blockquote:</p>' +
 					'<ul>' +
@@ -73,7 +56,13 @@ describe( 'GFMDataProcessor', () => {
 						'<li>asterisk 2</li>' +
 						'<li>asterisk 3</li>' +
 					'</ul>' +
-				'</blockquote>'
+				'</blockquote>',
+
+				'> A list within a blockquote:\n' +
+				'>\n' +
+				'> *   asterisk 1\n' +
+				'> *   asterisk 2\n' +
+				'> *   asterisk 3\n'
 			);
 		} );
 
@@ -116,7 +105,7 @@ describe( 'GFMDataProcessor', () => {
 				'>\n' +
 				'> ```\n' +
 				'> code 2\n' +
-				'> ```'
+				'> ```\n'
 			);
 		} );
 
@@ -156,7 +145,7 @@ describe( 'GFMDataProcessor', () => {
 				'>\n' +
 				'> ```\n' +
 				'> code 2\n' +
-				'> ```'
+				'> ```\n'
 			);
 		} );
 	} );

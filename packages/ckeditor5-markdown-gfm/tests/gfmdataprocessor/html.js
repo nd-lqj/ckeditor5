@@ -7,19 +7,13 @@ import { testDataProcessor } from '../_utils/utils';
 
 describe( 'GFMDataProcessor', () => {
 	describe( 'html', () => {
-		it( 'should keep html', () => {
+		it( 'should strip unknown html', () => {
 			testDataProcessor(
 				'test with <keep>html</keep> and <notkeep>not html</notkeep>',
 
-				'<p>test with <keep>html</keep> and <notkeep>not html</notkeep></p>',
+				'<p>test with html and not html</p>',
 
-				'test with <keep>html</keep> and not html',
-
-				{
-					setup: dataProcessor => {
-						dataProcessor.keepHtml( 'keep' );
-					}
-				}
+				'test with html and not html\n'
 			);
 		} );
 	} );

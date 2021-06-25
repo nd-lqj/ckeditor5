@@ -54,6 +54,9 @@
 			white-space: pre-wrap;
 			word-break: break-word;
 		}
+		#preview li > p {
+			margin: 0;
+		}
 	</style>
 </head>
 <body>
@@ -70,15 +73,15 @@
 	</section>
 
 	<section class="collapsed">
-		<pre><code id="markdown"></code></pre>
+		<pre><code class="container"></code></pre>
 	</section>
 
 	<section class="collapsed">
-		<pre><code id="html"></code></pre>
+		<pre><code class="container"></code></pre>
 	</section>
 
 	<section class="collapsed">
-		<div id="preview"></div>
+		<div class="container"></div>
 	</section>
 </main>
 
@@ -107,18 +110,16 @@
 	function handleEditor(editor) {
 		window.editor = editor;
 
+		const e2 = document.querySelector('main > :nth-child(2)');
+		const e3 = document.querySelector('main > :nth-child(3)');
+		const e4 = document.querySelector('main > :nth-child(4)');
+
 		const callback = () => {
 			const data = editor.getData();
-			const markdown = CKMD.markdown2html(data);
 
-			const e2 = document.querySelector('#markdown');
-			if (!e2.classList.contains('collapsed')) e2.textContent = markdown;
-
-			const e3 = document.querySelector('#html');
-			if (!e3.classList.contains('collapsed')) e3.textContent = data;
-
-			const e4 = document.querySelector('#preview');
-			if (!e4.classList.contains('collapsed')) e4.innerHTML = data;
+			if (!e2.classList.contains('collapsed')) e2.querySelector('.container').textContent = CKMD.html2markdown(data);
+			if (!e3.classList.contains('collapsed')) e3.querySelector('.container').textContent = data;
+			if (!e4.classList.contains('collapsed')) e4.querySelector('.container').innerHTML = data;
 		}
 
 		editor.model.document.on('change:data', callback);
@@ -146,15 +147,15 @@
 
 			if (!e.target.checked) {
 				el.classList.add('collapsed')
-				localStorage.removeItem('toggle' + index)
+				localStorage.setItem('collapsed' + index, '1')
 			} else {
 				el.classList.remove('collapsed')
-				localStorage.setItem('toggle' + index, '1')
+				localStorage.removeItem('collapsed' + index)
 			}
 
 		});
 
-		checkbox.checked = Boolean(localStorage.getItem('toggle' + index));
+		checkbox.checked = !(localStorage.getItem('collapsed' + index));
 
 		const event = document.createEvent("HTMLEvents");
 		event.initEvent('change', false, true);

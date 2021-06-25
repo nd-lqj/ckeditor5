@@ -11,7 +11,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'# Level 1',
 
-				'<h1>Level 1</h1>'
+				'<h1>Level 1</h1>',
+
+				'# Level 1\n'
 			);
 		} );
 
@@ -23,7 +25,7 @@ describe( 'GFMDataProcessor', () => {
 				'<h1>Level 1</h1>',
 
 				// When converting back it will be normalized to # representation.
-				'# Level 1'
+				'# Level 1\n'
 			);
 		} );
 
@@ -31,7 +33,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'## Level 2',
 
-				'<h2>Level 2</h2>'
+				'<h2>Level 2</h2>',
+
+				'## Level 2\n'
 			);
 		} );
 
@@ -43,7 +47,7 @@ describe( 'GFMDataProcessor', () => {
 				'<h2>Level 2</h2>',
 
 				// When converting back it will be normalized to ## representation.
-				'## Level 2'
+				'## Level 2\n'
 			);
 		} );
 
@@ -51,7 +55,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'### Level 3',
 
-				'<h3>Level 3</h3>'
+				'<h3>Level 3</h3>',
+
+				'### Level 3\n'
 			);
 		} );
 
@@ -59,7 +65,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'#### Level 4',
 
-				'<h4>Level 4</h4>'
+				'<h4>Level 4</h4>',
+
+				'#### Level 4\n'
 			);
 		} );
 
@@ -67,7 +75,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'##### Level 5',
 
-				'<h5>Level 5</h5>'
+				'<h5>Level 5</h5>',
+
+				'##### Level 5\n'
 			);
 		} );
 
@@ -75,7 +85,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'###### Level 6',
 
-				'<h6>Level 6</h6>'
+				'<h6>Level 6</h6>',
+
+				'###### Level 6\n'
 			);
 		} );
 
@@ -86,7 +98,7 @@ describe( 'GFMDataProcessor', () => {
 				'<h1>Level 1</h1>',
 
 				// When converting back it will be normalized to # Level 1.
-				'# Level 1'
+				'# Level 1\n'
 			);
 		} );
 
@@ -99,7 +111,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'# header\n' +
 				'\n' +
-				'# header'
+				'# header\n'
 			);
 		} );
 
@@ -115,7 +127,7 @@ describe( 'GFMDataProcessor', () => {
 				'\n' +
 				'## header\n' +
 				'\n' +
-				'### header'
+				'### header\n'
 			);
 		} );
 
@@ -124,7 +136,12 @@ describe( 'GFMDataProcessor', () => {
 				'# header\n\n' +
 				'paragraph',
 
-				'<h1>header</h1><p>paragraph</p>'
+				'<h1>header</h1>' +
+				'<p>paragraph</p>',
+
+				'# header\n' +
+				'\n' +
+				'paragraph\n'
 			);
 		} );
 	} );

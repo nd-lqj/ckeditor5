@@ -8,21 +8,27 @@
  */
 
 import unified from 'unified';
-import stringify from 'rehype-stringify';
-import gfm from 'remark-gfm';
-import parse from 'remark-parse';
-import remark2rehype from 'remark-rehype';
-import { all } from 'mdast-util-to-hast';
+import { toHtml } from 'hast-util-to-html';
+import { fromMarkdown } from 'mdast-util-from-markdown';
+import { gfmFromMarkdown } from 'mdast-util-gfm';
+import { gfm } from 'micromark-extension-gfm';
+import { toHast, all } from 'mdast-util-to-hast';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
 
 const processor = unified()
-	.use( parse )
-	.use( gfm )
-	.use( function figuretable( ) {
-		return transformer;
-
-		function transformer( tree ) {
+	.use( function parse( options ) {
+		this.Parser = doc => {
+			return fromMarkdown( doc, options );
+		};
+	}, {
+		extensions: [ gfm( {
+			singleTilde: true
+		} ) ],
+		mdastExtensions: [ gfmFromMarkdown ]
+	} )
+	.use( function table( ) {
+		return tree => {
 			visit( tree, 'table', ( table, index, parent ) => {
 				if ( parent.type !== 'figure' ) {
 					parent.children.splice(
@@ -38,12 +44,10 @@ const processor = unified()
 					return [ visit.SKIP, index ];
 				}
 			} );
-		}
+		};
 	} )
-	.use( function figureoembed( ) {
-		return transformer;
-
-		function transformer( tree ) {
+	.use( function oembed( ) {
+		return tree => {
 			visit( tree, 'paragraph', ( paragraph, index, parent ) => {
 				if ( paragraph.children.length !== 1 ) {
 					return;
@@ -74,20 +78,35 @@ const processor = unified()
 					}
 				}
 			} );
-		}
+		};
 	} )
-	.use( function figureimage( ) {
-		return transformer;
-
-		function transformer( tree ) {
+	.use( function image( ) {
+		return tree => {
 			visit( tree, 'paragraph', ( paragraph, index, parent ) => {
 				if ( paragraph.children.length !== 1 ) {
 					return;
 				}
 
+				let match = false;
 				let target = paragraph.children[ 0 ];
 
-				if ( target.type === 'image' ) {
+				if ( target.type === 'image' || target.type === 'imageReference' ) {
+					match = true;
+				}
+
+				if ( target.type === 'link' ) {
+					if ( target.children.length !== 1 ) {
+						return;
+					}
+
+					target = target.children[ 0 ];
+
+					if ( target.type === 'image' || target.type === 'imageReference' ) {
+						match = true;
+					}
+				}
+
+				if ( match ) {
 					parent.children.splice(
 						index,
 						1,
@@ -99,31 +118,14 @@ const processor = unified()
 
 					return [ visit.SKIP, index ];
 				}
-
-				if ( target.type === 'link' ) {
-					if ( target.children.length !== 1 ) {
-						return;
-					}
-
-					target = target.children[ 0 ];
-
-					if ( target.type === 'image' ) {
-						parent.children.splice(
-							index,
-							1,
-							u( 'figure', { class: 'image' }, [
-								u( 'text', '\n' ),
-								...paragraph.children,
-								u( 'text', '\n' )
-							] ) );
-
-						return [ visit.SKIP, index ];
-					}
-				}
 			} );
-		}
+		};
 	} )
-	.use( remark2rehype, {
+	.use( function mdast2hast( options ) {
+		return tree => {
+			return toHast( tree, options );
+		};
+	}, {
 		handlers: {
 			figure: ( h, node ) => {
 				return h( node, 'figure', { class: node.class }, all( h, node ) );
@@ -133,7 +135,11 @@ const processor = unified()
 			}
 		}
 	} )
-	.use( stringify )
+	.use( function stringify( options ) {
+		this.Compiler = tree => {
+			return toHtml( tree, options );
+		};
+	} )
 	.freeze();
 
 /**
