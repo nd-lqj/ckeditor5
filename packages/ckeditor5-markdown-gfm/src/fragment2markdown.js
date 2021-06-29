@@ -8,24 +8,56 @@
  */
 
 import unified from 'unified';
-import { fromParse5 } from 'hast-util-from-parse5';
 import { toMdast } from 'hast-util-to-mdast';
 import { gfmToMarkdown } from 'mdast-util-gfm';
 import { toMarkdown } from 'mdast-util-to-markdown';
-import { parse as parse5 } from 'parse5';
 import { u } from 'unist-builder';
+
+function toUnified( raw ) {
+	if ( !raw ) {
+		return raw;
+	}
+
+	function handleNode( node ) {
+		if ( !node ) {
+			return node;
+		}
+
+		const properties = {};
+
+		if ( node.getAttributes ) {
+			for ( const [ key, value ] of node.getAttributes() ) {
+				properties[ key ] = value;
+			}
+		}
+
+		const children = [];
+
+		if ( node.getChildren ) {
+			for ( const child of node.getChildren() ) {
+				children.push( handleNode( child ) );
+			}
+		}
+
+		return {
+			type: node.name ? 'element' : 'text',
+			tagName: node.name,
+			value: node._textData,
+			properties,
+			children
+		};
+	}
+
+	return {
+		type: 'root',
+		children: raw._children ? raw._children.map( handleNode ) : []
+	};
+}
 
 const processor = unified()
 	.use( function parse( options ) {
-		this.Parser = doc => {
-			return fromParse5( parse5( doc, options ) );
-		};
-	}, {
-		scriptingEnabled: false
-	} )
-	.use( function hast2mdast( options ) {
-		return tree => {
-			return toMdast( tree, options );
+		this.Parser = ( doc, raw ) => {
+			return toMdast( toUnified( raw ), options, this.data( 'document' ) );
 		};
 	}, {
 		handlers: {
@@ -62,11 +94,15 @@ const processor = unified()
 /**
  * Parses HTML to a markdown.
  *
- * @param {String} html
+ * @param {DocumentFragment} fragment
  * @returns {String}
  */
-export default function html2markdown( html ) {
-	return processor
-		.processSync( html )
-		.toString();
+export default function fragment2markdown( fragment, document ) {
+	const ret = processor()
+		.data( 'document', document )
+		.processSync( fragment );
+
+	// console.log( 'fragment2markdown # ret', ret );
+
+	return ret.toString();
 }

@@ -6,7 +6,6 @@
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
-import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Code from '@ckeditor/ckeditor5-basic-styles/src/code';
@@ -28,15 +27,12 @@ import Markdown from '@ckeditor/ckeditor5-markdown-gfm/src/markdown';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import ParagraphButtonUI from '@ckeditor/ckeditor5-paragraph/src/paragraphbuttonui';
-import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
-import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 
-import html2markdown from '@ckeditor/ckeditor5-markdown-gfm/src/html2markdown';
 import markdown2html from '@ckeditor/ckeditor5-markdown-gfm/src/markdown2html';
 
 /**
@@ -48,7 +44,6 @@ export default class CKMD extends ClassicEditorBase {}
 
 // Plugins to include in the build.
 CKMD.builtinPlugins = [
-	Autoformat,
 	BlockQuote,
 	Bold,
 	Code,
@@ -70,13 +65,11 @@ CKMD.builtinPlugins = [
 	MediaEmbed,
 	Paragraph,
 	ParagraphButtonUI,
-	PasteFromOffice,
 	RemoveFormat,
 	SourceEditing,
 	Strikethrough,
 	Table,
 	TableToolbar,
-	TextTransformation,
 
 	/**
 	 * extra plugins
@@ -159,5 +152,4 @@ CKMD.defaultConfig = {
 	language: 'en'
 };
 
-CKMD.html2markdown = html2markdown;
 CKMD.markdown2html = markdown2html;

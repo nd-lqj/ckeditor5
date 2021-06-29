@@ -12,10 +12,47 @@ const webpack = require( 'webpack' );
 const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
+const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
+
+const minimizer = [];
+
+const plugins = [
+	new CKEditorWebpackPlugin( {
+		language: 'en',
+		additionalLanguages: [ 'zh-cn' ]
+	} ),
+	new webpack.BannerPlugin( {
+		banner: bundler.getLicenseBanner(),
+		raw: true
+	} )
+];
+
+const isDevelopment = ( ( [ key, value ] ) => {
+	return key === '--mode' && value === 'development';
+} )( process.argv.slice( 2 ) );
+
+if ( !isDevelopment ) {
+	plugins.push( new BundleAnalyzerPlugin( {
+		analyzerMode: 'disabled',
+		generateStatsFile: true
+	} ) );
+
+	minimizer.push(
+		new TerserPlugin( {
+			sourceMap: true,
+			terserOptions: {
+				output: {
+					// Preserve CKEditor 5 license comments.
+					comments: /^!/
+				}
+			},
+			extractComments: false
+		} )
+	);
+}
 
 module.exports = {
-	mode: process.env.NODE_ENV || 'production',
-	watch: process.env.NODE_ENV === 'development',
+	watch: isDevelopment,
 	performance: { hints: false },
 
 	entry: path.resolve( __dirname, 'src', 'ckmd.js' ),
@@ -29,30 +66,10 @@ module.exports = {
 	},
 
 	optimization: {
-		minimizer: process.env.NODE_ENV === 'development' ? [] : [
-			new TerserPlugin( {
-				sourceMap: true,
-				terserOptions: {
-					output: {
-						// Preserve CKEditor 5 license comments.
-						comments: /^!/
-					}
-				},
-				extractComments: false
-			} )
-		]
+		minimizer
 	},
 
-	plugins: [
-		new CKEditorWebpackPlugin( {
-			language: 'en',
-			additionalLanguages: [ 'zh-cn' ]
-		} ),
-		new webpack.BannerPlugin( {
-			banner: bundler.getLicenseBanner(),
-			raw: true
-		} )
-	],
+	plugins,
 
 	module: {
 		rules: [

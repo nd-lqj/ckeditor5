@@ -7,10 +7,8 @@
  * @module markdown-gfm/gfmdataprocessor
  */
 
-import { HtmlDataProcessor } from 'ckeditor5/src/engine';
-
-import markdown2html from './markdown2html';
-import html2markdown from './html2markdown';
+import markdown2fragment from './markdown2fragment';
+import fragment2markdown from './fragment2markdown';
 
 /**
  * This data processor implementation uses GitHub Flavored Markdown as input/output data.
@@ -26,13 +24,7 @@ export default class GFMDataProcessor {
 	 * @param {module:engine/view/document~Document} document
 	 */
 	constructor( document ) {
-		/**
-		 * HTML data processor used to process HTML produced by the Markdown-to-HTML converter and the other way.
-		 *
-		 * @private
-		 * @member {module:engine/dataprocessor/htmldataprocessor~HtmlDataProcessor}
-		 */
-		this._htmlDP = new HtmlDataProcessor( document );
+		this.document = document;
 	}
 
 	/**
@@ -42,8 +34,7 @@ export default class GFMDataProcessor {
 	 * @returns {module:engine/view/documentfragment~DocumentFragment} The converted view element.
 	 */
 	toView( data ) {
-		const html = markdown2html( data );
-		return this._htmlDP.toView( html );
+		return markdown2fragment( data, this.document );
 	}
 
 	/**
@@ -54,8 +45,7 @@ export default class GFMDataProcessor {
 	 * @returns {String} Markdown string.
 	 */
 	toData( viewFragment ) {
-		const html = this._htmlDP.toData( viewFragment );
-		return html2markdown( html );
+		return fragment2markdown( viewFragment, this.document );
 	}
 
 	/**
@@ -68,9 +58,7 @@ export default class GFMDataProcessor {
 	 * @param {module:engine/view/matcher~MatcherPattern} pattern The pattern matching all view elements whose content should
 	 * be treated as raw data.
 	 */
-	registerRawContentMatcher( pattern ) {
-		this._htmlDP.registerRawContentMatcher( pattern );
-	}
+	registerRawContentMatcher( /* pattern */ ) {}
 
 	/**
 	 * This method does not have any effect on the data processor result. It exists for compatibility with the
