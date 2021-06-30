@@ -34,7 +34,7 @@ export default class GFMDataProcessor {
 	 * @returns {module:engine/view/documentfragment~DocumentFragment} The converted view element.
 	 */
 	toView( data ) {
-		return markdown2fragment( data, this.document );
+		return markdown2fragment( data, { document: this.document } );
 	}
 
 	/**
@@ -45,7 +45,7 @@ export default class GFMDataProcessor {
 	 * @returns {String} Markdown string.
 	 */
 	toData( viewFragment ) {
-		return fragment2markdown( viewFragment, this.document );
+		return fragment2markdown( viewFragment, { document: this.document } );
 	}
 
 	/**

@@ -10,7 +10,9 @@ describe( 'GFMDataProcessor', () => {
 		it( 'single line', () => {
 			testDataProcessor(
 				'single line paragraph',
+
 				'<p>single line paragraph</p>',
+
 				'single line paragraph\n'
 			);
 		} );
@@ -21,7 +23,7 @@ describe( 'GFMDataProcessor', () => {
 				'second\n' +
 				'third',
 
-				'<p>first second third</p>',
+				'<p>first\nsecond\nthird</p>',
 
 				'first second third\n'
 			);
@@ -32,7 +34,7 @@ describe( 'GFMDataProcessor', () => {
 				'single line\n' +
 				'# header',
 
-				'<p>single line</p>' +
+				'<p>single line</p>\n' +
 				'<h1>header</h1>',
 
 				'single line\n' +
@@ -46,8 +48,10 @@ describe( 'GFMDataProcessor', () => {
 				'single line' +
 				'\n> quote',
 
-				'<p>single line</p>' +
-				'<blockquote><p>quote</p></blockquote>',
+				'<p>single line</p>\n' +
+				'<blockquote>\n' +
+					'<p>quote</p>\n' +
+				'</blockquote>',
 
 				'single line' +
 				'\n' +
@@ -60,8 +64,10 @@ describe( 'GFMDataProcessor', () => {
 				'single line\n' +
 				'*   item',
 
-				'<p>single line</p>' +
-				'<ul><li>item</li></ul>',
+				'<p>single line</p>\n' +
+				'<ul>\n' +
+					'<li>item</li>\n' +
+				'</ul>',
 
 				'single line\n' +
 				'\n' +

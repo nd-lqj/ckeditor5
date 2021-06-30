@@ -11,8 +11,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'+ this is a list item indented with tabs',
 
-				'<ul>' +
-				'<li>this is a list item indented with tabs</li>' +
+				'<ul>\n' +
+					'<li>this is a list item indented with tabs</li>\n' +
 				'</ul>',
 
 				'*   this is a list item indented with tabs\n'
@@ -23,8 +23,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'+   this is a list item indented with spaces',
 
-				'<ul>' +
-				'<li>this is a list item indented with spaces</li>' +
+				'<ul>\n' +
+					'<li>this is a list item indented with spaces</li>\n' +
 				'</ul>',
 
 				'*   this is a list item indented with spaces\n'

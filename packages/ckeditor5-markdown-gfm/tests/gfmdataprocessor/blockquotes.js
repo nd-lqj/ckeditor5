@@ -11,7 +11,9 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'> foo bar',
 
-				'<blockquote><p>foo bar</p></blockquote>',
+				'<blockquote>\n' +
+					'<p>foo bar</p>\n' +
+				'</blockquote>',
 
 				'> foo bar\n'
 			);
@@ -25,12 +27,12 @@ describe( 'GFMDataProcessor', () => {
 				'>\n' +
 				'> foo',
 
-				'<blockquote>' +
-					'<p>foo</p>' +
-					'<blockquote>' +
-						'<p>bar</p>' +
-					'</blockquote>' +
-					'<p>foo</p>' +
+				'<blockquote>\n' +
+					'<p>foo</p>\n' +
+					'<blockquote>\n' +
+						'<p>bar</p>\n' +
+					'</blockquote>\n' +
+					'<p>foo</p>\n' +
 				'</blockquote>',
 
 				'> foo\n' +
@@ -49,13 +51,13 @@ describe( 'GFMDataProcessor', () => {
 				'> * asterisk 2\n' +
 				'> * asterisk 3',
 
-				'<blockquote>' +
-					'<p>A list within a blockquote:</p>' +
-					'<ul>' +
-						'<li>asterisk 1</li>' +
-						'<li>asterisk 2</li>' +
-						'<li>asterisk 3</li>' +
-					'</ul>' +
+				'<blockquote>\n' +
+					'<p>A list within a blockquote:</p>\n' +
+					'<ul>\n' +
+						'<li>asterisk 1</li>\n' +
+						'<li>asterisk 2</li>\n' +
+						'<li>asterisk 3</li>\n' +
+					'</ul>\n' +
 				'</blockquote>',
 
 				'> A list within a blockquote:\n' +
@@ -80,19 +82,19 @@ describe( 'GFMDataProcessor', () => {
 				'> code 2\n' +
 				'> ```',
 
-				'<blockquote>' +
-					'<p>Example 1:</p>' +
+				'<blockquote>\n' +
+					'<p>Example 1:</p>\n' +
 					'<pre>' +
 						'<code>' +
 							'code 1\n' +
 						'</code>' +
-					'</pre>' +
-					'<p>Example 2:</p>' +
+					'</pre>\n' +
+					'<p>Example 2:</p>\n' +
 					'<pre>' +
 						'<code>' +
 							'code 2\n' +
 						'</code>' +
-					'</pre>' +
+					'</pre>\n' +
 				'</blockquote>',
 
 				'> Example 1:\n' +
@@ -119,22 +121,21 @@ describe( 'GFMDataProcessor', () => {
 				'>\n' +
 				'>     code 2\n',
 
-				'<blockquote>' +
-					'<p>Example 1:</p>' +
+				'<blockquote>\n' +
+					'<p>Example 1:</p>\n' +
 					'<pre>' +
 						'<code>' +
 							'code 1\n' +
 						'</code>' +
-					'</pre>' +
-					'<p>Example 2:</p>' +
+					'</pre>\n' +
+					'<p>Example 2:</p>\n' +
 					'<pre>' +
 						'<code>' +
 							'code 2\n' +
 						'</code>' +
-					'</pre>' +
+					'</pre>\n' +
 				'</blockquote>',
 
-				// When converting back to data, DataProcessor will normalize tabs to ```.
 				'> Example 1:\n' +
 				'>\n' +
 				'> ```\n' +

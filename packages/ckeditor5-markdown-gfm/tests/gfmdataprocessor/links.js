@@ -31,10 +31,10 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'*   http://example.com/',
 
-				'<ul>' +
+				'<ul>\n' +
 					'<li>' +
 						'<a href="http://example.com/">http://example.com/</a>' +
-					'</li>' +
+					'</li>\n' +
 				'</ul>',
 
 				'*   <http://example.com/>\n'
@@ -45,8 +45,8 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'> Blockquoted: http://example.com/',
 
-				'<blockquote>' +
-					'<p>Blockquoted: <a href="http://example.com/">http://example.com/</a></p>' +
+				'<blockquote>\n' +
+					'<p>Blockquoted: <a href="http://example.com/">http://example.com/</a></p>\n' +
 				'</blockquote>',
 
 				'> Blockquoted: <http://example.com/>\n'
@@ -160,13 +160,15 @@ describe( 'GFMDataProcessor', () => {
 			);
 		} );
 
-		// it( 'should process empty link', () => {
-		// 	testDataProcessor(
-		// 		'[Empty]()',
-		//
-		// 		'<p><a href="">Empty</a></p>'
-		// 	);
-		// } );
+		it( 'should process empty link', () => {
+			testDataProcessor(
+				'[Empty]()',
+
+				'<p><a href="">Empty</a></p>',
+
+				'[Empty]()\n'
+			);
+		} );
 
 		it( 'should process reference links', () => {
 			testDataProcessor(
@@ -361,7 +363,7 @@ describe( 'GFMDataProcessor', () => {
 				'reference]\n\n' +
 				'[multiline reference]: foo',
 
-				'<p>This is <a href="foo">multiline reference</a></p>',
+				'<p>This is <a href="foo">multiline\nreference</a></p>',
 
 				'This is [multiline reference](foo)\n'
 			);
@@ -373,7 +375,7 @@ describe( 'GFMDataProcessor', () => {
 				'reference]\n\n' +
 				'[multiline reference]: foo',
 
-				'<p>This is <a href="foo">multiline reference</a></p>',
+				'<p>This is <a href="foo">multiline\nreference</a></p>',
 
 				'This is [multiline reference](foo)\n'
 			);

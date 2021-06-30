@@ -4,7 +4,7 @@
  */
 
 /**
- * @module markdown-gfm/markdown2html
+ * @module markdown-gfm/markdown2fragment
  */
 
 import unified from 'unified';
@@ -14,7 +14,7 @@ import { gfm } from 'micromark-extension-gfm';
 import { toHast, all } from 'mdast-util-to-hast';
 import { u } from 'unist-builder';
 import { visit } from 'unist-util-visit';
-import { toFragment } from './mdast2fragment';
+import { toFragment } from './hast2fragment';
 
 const processor = unified()
 	.use( function parse( options ) {
@@ -42,40 +42,6 @@ const processor = unified()
 					);
 
 					return [ visit.SKIP, index ];
-				}
-			} );
-		};
-	} )
-	.use( function oembed( ) {
-		return tree => {
-			visit( tree, 'paragraph', ( paragraph, index, parent ) => {
-				if ( paragraph.children.length !== 1 ) {
-					return;
-				}
-
-				let target = paragraph.children[ 0 ];
-
-				if ( target.type === 'link' ) {
-					if ( target.children.length !== 1 ) {
-						return;
-					}
-
-					const url = target.url;
-
-					target = target.children[ 0 ];
-
-					if ( target.type === 'text' && target.value === '!oembed' ) {
-						parent.children.splice(
-							index,
-							1,
-							u( 'figure', { class: 'media' }, [
-								u( 'text', '\n' ),
-								u( 'oembed', { url } ),
-								u( 'text', '\n' )
-							] ) );
-
-						return [ visit.SKIP, index ];
-					}
 				}
 			} );
 		};
@@ -121,6 +87,40 @@ const processor = unified()
 			} );
 		};
 	} )
+	.use( function oembed( ) {
+		return tree => {
+			visit( tree, 'paragraph', ( paragraph, index, parent ) => {
+				if ( paragraph.children.length !== 1 ) {
+					return;
+				}
+
+				let target = paragraph.children[ 0 ];
+
+				if ( target.type === 'link' ) {
+					if ( target.children.length !== 1 ) {
+						return;
+					}
+
+					const url = target.url;
+
+					target = target.children[ 0 ];
+
+					if ( target.type === 'text' && target.value === '!oembed' ) {
+						parent.children.splice(
+							index,
+							1,
+							u( 'figure', { class: 'media' }, [
+								u( 'text', '\n' ),
+								u( 'oembed', { url } ),
+								u( 'text', '\n' )
+							] ) );
+
+						return [ visit.SKIP, index ];
+					}
+				}
+			} );
+		};
+	} )
 	.use( function mdast2hast( options ) {
 		return tree => {
 			return toHast( tree, options );
@@ -143,17 +143,14 @@ const processor = unified()
 	.freeze();
 
 /**
- * Parses markdown string to an HTML.
+ * Parses markdown string to ViewFragment.
  *
  * @param {String} markdown
  * @returns {DocumentFragment}
  */
-export default function markdown2fragment( markdown, document ) {
-	const ret = processor()
-		.data( 'document', document )
-		.processSync( markdown );
-
-	// console.log( 'markdown2fragment # ret', ret );
-
-	return ret.result;
+export default function markdown2fragment( markdown, options ) {
+	return processor()
+		.data( options )
+		.processSync( markdown )
+		.result;
 }

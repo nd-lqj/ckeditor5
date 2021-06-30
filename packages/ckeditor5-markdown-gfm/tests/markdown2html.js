@@ -359,7 +359,10 @@ describe( 'markdown2html', () => {
 	it( 'oembed works #1', () => {
 		// not a valid url in providers
 		expect( markdown2html(
-			'[!oembed](//ckeditor.com)'
+			'[!oembed](//ckeditor.com)',
+			{
+				semanticOembed: true
+			}
 		) ).to.equal(
 			'<figure class="media">\n<oembed url="//ckeditor.com"></oembed>\n</figure>'
 		);
@@ -367,7 +370,10 @@ describe( 'markdown2html', () => {
 
 	it( 'oembed works #2', () => {
 		expect( markdown2html(
-			'[!oembed](https://www.youtube.com/watch?v=H08tGjXNHO4)'
+			'[!oembed](https://www.youtube.com/watch?v=H08tGjXNHO4)',
+			{
+				semanticOembed: true
+			}
 		) ).to.equal(
 			'<figure class="media">\n<oembed url="https://www.youtube.com/watch?v=H08tGjXNHO4"></oembed>\n</figure>'
 		);

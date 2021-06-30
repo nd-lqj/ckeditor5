@@ -107,7 +107,8 @@ describe( 'GFMDataProcessor', () => {
 				'# header\n' +
 				'# header',
 
-				'<h1>header</h1><h1>header</h1>',
+				'<h1>header</h1>\n' +
+				'<h1>header</h1>',
 
 				'# header\n' +
 				'\n' +
@@ -121,7 +122,9 @@ describe( 'GFMDataProcessor', () => {
 				'## header\n' +
 				'### header',
 
-				'<h1>header</h1><h2>header</h2><h3>header</h3>',
+				'<h1>header</h1>\n' +
+				'<h2>header</h2>\n' +
+				'<h3>header</h3>',
 
 				'# header\n' +
 				'\n' +
@@ -133,10 +136,10 @@ describe( 'GFMDataProcessor', () => {
 
 		it( 'should process headers followed by a paragraph', () => {
 			testDataProcessor(
-				'# header\n\n' +
+				'# header\n' +
 				'paragraph',
 
-				'<h1>header</h1>' +
+				'<h1>header</h1>\n' +
 				'<p>paragraph</p>',
 
 				'# header\n' +

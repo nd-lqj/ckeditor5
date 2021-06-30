@@ -11,7 +11,7 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'![alt text](http://example.com/image.png "title text")',
 
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png" title="title text"></img></figure>',
+				'<figure class="image">\n<img alt="alt text" src="http://example.com/image.png" title="title text"></img>\n</figure>',
 
 				'![alt text](http://example.com/image.png "title text")\n'
 
@@ -22,7 +22,7 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'![alt text](http://example.com/image.png)',
 
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png"></img></figure>',
+				'<figure class="image">\n<img alt="alt text" src="http://example.com/image.png"></img>\n</figure>',
 
 				'![alt text](http://example.com/image.png)\n'
 			);
@@ -32,7 +32,7 @@ describe( 'GFMDataProcessor', () => {
 			testDataProcessor(
 				'![](http://example.com/image.png "title text")',
 
-				'<figure class="image"><img alt="" src="http://example.com/image.png" title="title text"></img></figure>',
+				'<figure class="image">\n<img alt="" src="http://example.com/image.png" title="title text"></img>\n</figure>',
 
 				'![](http://example.com/image.png "title text")\n'
 			);
@@ -43,7 +43,7 @@ describe( 'GFMDataProcessor', () => {
 				'![alt text][logo]\n\n' +
 				'[logo]: http://example.com/image.png "title text"',
 
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png" title="title text"></img></figure>',
+				'<figure class="image">\n<img alt="alt text" src="http://example.com/image.png" title="title text"></img>\n</figure>',
 
 				// Referenced images when converting back are converted to direct links.
 				'![alt text](http://example.com/image.png "title text")\n'
@@ -55,7 +55,7 @@ describe( 'GFMDataProcessor', () => {
 				'![alt text][logo]\n\n' +
 				'[logo]: http://example.com/image.png',
 
-				'<figure class="image"><img alt="alt text" src="http://example.com/image.png"></img></figure>',
+				'<figure class="image">\n<img alt="alt text" src="http://example.com/image.png"></img>\n</figure>',
 
 				// Referenced images when converting back are converted to direct links.
 				'![alt text](http://example.com/image.png)\n'
@@ -67,7 +67,7 @@ describe( 'GFMDataProcessor', () => {
 				'![][logo]\n\n' +
 				'[logo]: http://example.com/image.png "title text"',
 
-				'<figure class="image"><img alt="" src="http://example.com/image.png" title="title text"></img></figure>',
+				'<figure class="image">\n<img alt="" src="http://example.com/image.png" title="title text"></img>\n</figure>',
 
 				// Referenced images when converting back are converted to direct links.
 				'![](http://example.com/image.png "title text")\n'

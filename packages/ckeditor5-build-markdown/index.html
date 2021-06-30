@@ -189,6 +189,10 @@ CKMD
 
 		editor.model.document.on('change:data', callback);
 
+		e2.addEventListener('dblclick', (e) => {
+			editor.setData(e.target.textContent);
+		});
+
 		setTimeout(callback, 500);
 	}
 
