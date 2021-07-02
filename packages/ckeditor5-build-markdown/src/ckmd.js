@@ -38,10 +38,8 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
  */
 import DisallowNestingTables from './extraPlugins/disallownestingtables';
 
-export default class CKMD extends ClassicEditorBase {}
-
 // Plugins to include in the build.
-CKMD.builtinPlugins = [
+const builtinPlugins = [
 	BlockQuote,
 	Bold,
 	Code,
@@ -76,7 +74,7 @@ CKMD.builtinPlugins = [
 ];
 
 // Editor configuration.
-CKMD.defaultConfig = {
+const defaultConfig = {
 	toolbar: {
 		items: [
 			'undo',
@@ -149,3 +147,8 @@ CKMD.defaultConfig = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
+
+export default class CKMD extends ClassicEditorBase {
+	static get builtinPlugins() { return builtinPlugins; }
+	static get defaultConfig() { return defaultConfig; }
+}

@@ -12,7 +12,7 @@ const webpack = require( 'webpack' );
 const { bundler, styles } = require( '@ckeditor/ckeditor5-dev-utils' );
 const CKEditorWebpackPlugin = require( '@ckeditor/ckeditor5-dev-webpack-plugin' );
 const TerserPlugin = require( 'terser-webpack-plugin' );
-const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
+// const { BundleAnalyzerPlugin } = require( 'webpack-bundle-analyzer' );
 
 const minimizer = [];
 
@@ -32,10 +32,10 @@ const isDevelopment = ( ( [ key, value ] ) => {
 } )( process.argv.slice( 2 ) );
 
 if ( !isDevelopment ) {
-	plugins.push( new BundleAnalyzerPlugin( {
-		analyzerMode: 'disabled',
-		generateStatsFile: true
-	} ) );
+	// plugins.push( new BundleAnalyzerPlugin( {
+	// 	analyzerMode: 'disabled',
+	// 	generateStatsFile: true
+	// } ) );
 
 	minimizer.push(
 		new TerserPlugin( {
@@ -51,7 +51,7 @@ if ( !isDevelopment ) {
 	);
 }
 
-module.exports = {
+module.exports = [ {
 	watch: isDevelopment,
 	performance: { hints: false },
 
@@ -102,4 +102,53 @@ module.exports = {
 			}
 		]
 	}
-};
+}, {
+	watch: isDevelopment,
+	performance: { hints: false },
+
+	entry: path.resolve( __dirname, 'src', 'ckmd.js' ),
+
+	output: {
+		path: path.resolve( __dirname, 'lib' ),
+		filename: 'ckmd.js',
+		libraryTarget: 'commonjs2'
+	},
+
+	optimization: {
+		minimizer
+	},
+
+	plugins,
+
+	module: {
+		rules: [
+			{
+				test: /\.svg$/,
+				use: [ 'raw-loader' ]
+			},
+			{
+				test: /\.css$/,
+				use: [
+					{
+						loader: 'style-loader',
+						options: {
+							injectType: 'singletonStyleTag',
+							attributes: {
+								'data-cke': true
+							}
+						}
+					},
+					{
+						loader: 'postcss-loader',
+						options: styles.getPostCssConfig( {
+							themeImporter: {
+								themePath: require.resolve( '@ckeditor/ckeditor5-theme-lark' )
+							},
+							minify: true
+						} )
+					}
+				]
+			}
+		]
+	}
+} ];

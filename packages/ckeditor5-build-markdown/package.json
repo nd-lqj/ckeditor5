@@ -1,6 +1,6 @@
 {
   "name": "ckmd",
-  "version": "28.0.1-rc.0",
+  "version": "28.0.0-rc.4",
   "description": "The classic editor build of CKEditor 5 with github flavored markdown support.",
   "keywords": [
     "ckeditor5-build",
@@ -23,8 +23,10 @@
     "github",
     "markdown"
   ],
-  "main": "./build/ckmd.js",
+  "main": "./lib/ckmd.js",
+  "types": "./lib/ckmd.d.ts",
   "files": [
+    "lib",
     "build"
   ],
   "dependencies": {
@@ -73,14 +75,11 @@
     "directory": "packages/ckeditor5-build-classic"
   },
   "scripts": {
-    "analyze": "webpack-bundle-analyzer ./build/stats.json",
+    "analyze": "webpack-bundle-analyzer ./stats.json",
     "build": "webpack",
+    "postbuild": "cp ./src/ckmd.d.ts ./lib/",
     "dev": "yarn build --mode development",
     "prepublish": "yarn build",
-    "preversion": "yarn build",
-    "publish:major": "yarn publish --major",
-    "publish:minor": "yarn publish --minor",
-    "publish:patch": "yarn publish --patch",
-    "publish:rc": "yarn publish --prerelease --preid rc"
+    "preversion": "yarn build"
   }
 }
