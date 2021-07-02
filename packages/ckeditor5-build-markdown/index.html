@@ -23,27 +23,12 @@
 			position: relative;
 		}
 		main > section:nth-child(1) {
-			flex: 5.5;
+			flex: 6;
 		}
 		main > section:nth-child(2) {
-			flex: 1.5 1.5 15%;
+			flex: 4;
 			padding: 0 10px;
 			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
-		}
-		main > section:nth-child(3) {
-			flex: 1.5 1.5 15%;
-			padding: 0 10px;
-			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
-		}
-		main > section:nth-child(4) {
-			flex: 1.5 1.5 15%;
-			padding: 0 10px;
-			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
-		}
-		main > section.collapsed {
-			position: absolute;
-			visibility: hidden;
-			z-index: -1;
 		}
 		textarea#editor {
 			position: absolute;
@@ -60,12 +45,6 @@
 	</style>
 </head>
 <body>
-
-<header>
-	<input id="toggle-2" aria-label="toggle" type="checkbox" /> <label for="toggle-2">markdown</label>
-	<input id="toggle-3" aria-label="toggle" type="checkbox" /> <label for="toggle-3">html</label>
-	<input id="toggle-4" aria-label="toggle" type="checkbox" /> <label for="toggle-4">preview</label>
-</header>
 
 <main>
 	<section>
@@ -133,16 +112,8 @@ CKMD
 4. Shenzhou (Chinese)</textarea>
 	</section>
 
-	<section class="collapsed">
+	<section>
 		<pre><code class="container"></code></pre>
-	</section>
-
-	<section class="collapsed">
-		<pre><code class="container"></code></pre>
-	</section>
-
-	<section class="collapsed">
-		<div class="container"></div>
 	</section>
 </main>
 
@@ -172,19 +143,9 @@ CKMD
 		window.editor = editor;
 
 		const e2 = document.querySelector('main > :nth-child(2)');
-		const e3 = document.querySelector('main > :nth-child(3)');
-		const e4 = document.querySelector('main > :nth-child(4)');
 
 		const callback = () => {
-			const data = editor.getData();
-
-			if (!e2.classList.contains('collapsed')) e2.querySelector('.container').textContent = data;
-
-			if (!e3.classList.contains('collapsed') || !e4.classList.contains('collapsed')) {
-				const html = CKMD.markdown2html(data);
-				if (!e3.classList.contains('collapsed')) e3.querySelector('.container').textContent = html;
-				if (!e4.classList.contains('collapsed')) e4.querySelector('.container').innerHTML = html;
-			}
+			e2.querySelector('.container').textContent = editor.getData();
 		}
 
 		editor.model.document.on('change:data', callback);
@@ -206,31 +167,6 @@ CKMD
 	.catch((error) => {
 		console.error( 'There was a problem initializing the editor.', error );
 	});
-
-	function handleToggle(index) {
-		const checkbox = document.querySelector('#toggle-' + index);
-
-		checkbox.addEventListener('change', (e) => {
-			const el = document.querySelector('main > section:nth-child(' + index + ')');
-
-			if (!e.target.checked) {
-				el.classList.add('collapsed')
-				localStorage.setItem('collapsed' + index, '1')
-			} else {
-				el.classList.remove('collapsed')
-				localStorage.removeItem('collapsed' + index)
-			}
-
-		});
-
-		checkbox.checked = !(localStorage.getItem('collapsed' + index));
-
-		const event = document.createEvent("HTMLEvents");
-		event.initEvent('change', false, true);
-		checkbox.dispatchEvent(event);
-	}
-
-	[2, 3, 4].forEach(handleToggle);
 </script>
 
 </body>

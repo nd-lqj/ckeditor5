@@ -33,8 +33,6 @@ import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 
-import markdown2html from '@ckeditor/ckeditor5-markdown-gfm/src/markdown2html';
-
 /**
  * extra plugins
  */
@@ -151,5 +149,3 @@ CKMD.defaultConfig = {
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
 };
-
-CKMD.markdown2html = markdown2html;
