@@ -98,7 +98,7 @@ The data used to generate the following tables comes from the package metadata. 
 		<tr>
 			<td class="plugin" rowspan="2">
 				<p>
-					<a href="../../../features/images/image-upload/image-upload.html#ckfinder">Alignment</a>
+					<a href="../../../features/text-alignment.html">Alignment</a>
 				</p>
 				<p>
 					<a href="../../../api/module_alignment_alignment-Alignment.html"><code>Alignment</code></a>
@@ -606,6 +606,39 @@ The data used to generate the following tables comes from the package metadata. 
 		</tr>
 	</tbody>
 </table>
+<h3 id="ckeditor5-find-and-replace"><code>ckeditor5-find-and-replace</code></h3>
+<p>
+	Source file: <a href="https://github.com/ckeditor/ckeditor5/blob/master/packages/ckeditor5-find-and-replace/ckeditor5-metadata.json"><code>@ckeditor/ckeditor5-find-and-replace/ckeditor5-metadata.json</code></a>
+</p>
+<table class="features-html-output">
+	<thead>
+		<tr>
+			<th class="plugin">
+				Plugin
+			</th>
+			<th class="html-output">
+				HTML output
+			</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td class="plugin">
+				<p>
+					<a href="../../../features/find-and-replace.html">Find and replace</a>
+				</p>
+				<p>
+					<a href="../../../api/module_find-and-replace_findandreplace-FindAndReplace.html"><code>FindAndReplace</code></a>
+				</p>
+			</td>
+			<td class="html-output">
+				<p>
+					None.
+				</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
 <h3 id="ckeditor5-font"><code>ckeditor5-font</code></h3>
 <p>
 	Source file: <a href="https://github.com/ckeditor/ckeditor5/blob/master/packages/ckeditor5-font/ckeditor5-metadata.json"><code>@ckeditor/ckeditor5-font/ckeditor5-metadata.json</code></a>
@@ -910,10 +943,10 @@ The data used to generate the following tables comes from the package metadata. 
 		<tr>
 			<td class="plugin" rowspan="2">
 				<p>
-					<a href="../../../features/images/images-overview.html">Image</a>
+					<a href="../../../features/images/images-installation.html#inline-and-block-images">Block image</a>
 				</p>
 				<p>
-					<a href="../../../api/module_image_image-Image.html"><code>Image</code></a>
+					<a href="../../../api/module_image_imageblock-ImageBlock.html"><code>ImageBlock</code></a>
 				</p>
 			</td>
 			<td class="html-output">
@@ -923,6 +956,34 @@ The data used to generate the following tables comes from the package metadata. 
 		<tr>
 			<td class="html-output">
 				<code>&lt;<strong>img</strong><br>    <strong>alt</strong>="*"<br>    <strong>sizes</strong>="*"<br>    <strong>src</strong>="*"<br>    <strong>srcset</strong>="*"<br>    <strong>width</strong>="*"<br>&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td class="plugin">
+				<p>
+					<a href="../../../features/images/images-installation.html#inline-and-block-images">Inline image</a>
+				</p>
+				<p>
+					<a href="../../../api/module_image_imageinline-ImageInline.html"><code>ImageInline</code></a>
+				</p>
+			</td>
+			<td class="html-output">
+				<code>&lt;<strong>img</strong><br>    <strong>alt</strong>="*"<br>    <strong>sizes</strong>="*"<br>    <strong>src</strong>="*"<br>    <strong>srcset</strong>="*"<br>    <strong>width</strong>="*"<br>&gt;</code>
+			</td>
+		</tr>
+		<tr>
+			<td class="plugin">
+				<p>
+					<a href="../../../features/images/images-overview.html">Image</a>
+				</p>
+				<p>
+					<a href="../../../api/module_image_image-Image.html"><code>Image</code></a>
+				</p>
+			</td>
+			<td class="html-output">
+				<p>
+					None.
+				</p>
 			</td>
 		</tr>
 		<tr>
@@ -961,7 +1022,7 @@ The data used to generate the following tables comes from the package metadata. 
 				</p>
 			</td>
 			<td class="html-output">
-				<code>&lt;<strong>figure</strong> <strong>class</strong>="image-style-side image-style-align-left image-style-align-center image-style-align-right"&gt;</code>
+				<code>&lt;<strong>figure</strong> <strong>class</strong>="image-style-side image-style-align-left image-style-align-right image-style-block-align-center image-style-block-align-left image-style-block-align-right"&gt;</code>
 			</td>
 		</tr>
 		<tr>
