@@ -63,26 +63,6 @@ CKMD
 	} );
 ```
 
-### Converters
-
-markdown to html
-
-```js
-import markdown2html from 'ckmd/markdown2html';
-
-markdown2html('[example](https://example.com/)')
-```
-
-html to markdown
-
-```js
-import html2markdown from 'ckmd/html2markdown';
-
-html2markdown('<a href="https://example.com/">example</a>')
-```
-
-
-
 **Note:** If you are planning to integrate CKEditor 5 deep into your application, it is actually more convenient and recommended to install and import the source modules directly (like it happens in `ckeditor.js`). Read more in the [Advanced setup guide](https://ckeditor.com/docs/ckeditor5/latest/builds/guides/integration/advanced-setup.html).
 
 ## License

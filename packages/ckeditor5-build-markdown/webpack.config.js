@@ -39,7 +39,7 @@ if ( !isDevelopment ) {
 
 	minimizer.push(
 		new TerserPlugin( {
-			sourceMap: true,
+			// sourceMap: true,
 			terserOptions: {
 				output: {
 					// Preserve CKEditor 5 license comments.
@@ -52,6 +52,7 @@ if ( !isDevelopment ) {
 }
 
 module.exports = [ {
+	devtool: isDevelopment ? undefined : 'source-map',
 	watch: isDevelopment,
 	performance: { hints: false },
 
@@ -103,6 +104,7 @@ module.exports = [ {
 		]
 	}
 }, {
+	devtool: isDevelopment ? undefined : 'source-map',
 	watch: isDevelopment,
 	performance: { hints: false },
 
