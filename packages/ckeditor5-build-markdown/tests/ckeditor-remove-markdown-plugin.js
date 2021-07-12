@@ -5,7 +5,7 @@
 
 /* globals document */
 
-import CKMD from '../src/ckmd';
+import CKMD from '../src/ckeditor';
 import BaseClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 import { describeMemoryUsage, testMemoryUsage } from '@ckeditor/ckeditor5-core/tests/_utils/memory';
 
@@ -199,7 +199,7 @@ describe( 'CKMD build', () => {
 					.then( newEditor => {
 						editor = newEditor;
 
-						expect( editor.ui.view.toolbar.items.length ).to.equal( 32 );
+						expect( editor.ui.view.toolbar.items.length ).to.equal( 31 );
 						expect( editor.ui.view.stickyPanel.viewportTopOffset ).to.equal( 42 );
 					} );
 			} );
@@ -215,7 +215,7 @@ describe( 'CKMD build', () => {
 					.then( newEditor => {
 						editor = newEditor;
 
-						expect( editor.ui.view.toolbar.items.length ).to.equal( 31 );
+						expect( editor.ui.view.toolbar.items.length ).to.equal( 30 );
 						expect( editor.ui.view.toolbar.items.find( item => item.label === 'Italic' ) ).to.be.undefined;
 					} );
 			} );

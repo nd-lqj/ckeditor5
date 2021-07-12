@@ -1,6 +1,6 @@
 {
   "name": "ckmd",
-  "version": "28.0.0-rc.5",
+  "version": "29.0.0-rc.0",
   "description": "The classic editor build of CKEditor 5 with github flavored markdown support.",
   "keywords": [
     "ckeditor5-build",
@@ -23,36 +23,36 @@
     "github",
     "markdown"
   ],
-  "main": "./lib/ckmd.js",
-  "types": "./lib/ckmd.d.ts",
+  "main": "./build/ckeditor.js",
+  "types": "./build/ckeditor.d.ts",
   "files": [
-    "lib",
-    "build"
+    "build",
+    "ckeditor5-metadata.json"
   ],
   "dependencies": {
-    "@ckeditor/ckeditor5-basic-styles": "^28.0.0",
-    "@ckeditor/ckeditor5-block-quote": "^28.0.0",
-    "@ckeditor/ckeditor5-code-block": "^28.0.0",
-    "@ckeditor/ckeditor5-editor-classic": "^28.0.0",
-    "@ckeditor/ckeditor5-essentials": "^28.0.0",
-    "@ckeditor/ckeditor5-heading": "^28.0.0",
-    "@ckeditor/ckeditor5-horizontal-line": "^28.0.0",
-    "@ckeditor/ckeditor5-image": "^28.0.0",
-    "@ckeditor/ckeditor5-indent": "^28.0.0",
-    "@ckeditor/ckeditor5-link": "^28.0.0",
-    "@ckeditor/ckeditor5-list": "^28.0.0",
-    "@ckeditor/ckeditor5-markdown-gfm": "^28.0.0",
-    "@ckeditor/ckeditor5-media-embed": "^28.0.0",
-    "@ckeditor/ckeditor5-paragraph": "^28.0.0",
-    "@ckeditor/ckeditor5-remove-format": "^28.0.0",
-    "@ckeditor/ckeditor5-source-editing": "^0.0.1",
-    "@ckeditor/ckeditor5-table": "^28.0.0"
+    "@ckeditor/ckeditor5-basic-styles": "^29.0.0",
+    "@ckeditor/ckeditor5-block-quote": "^29.0.0",
+    "@ckeditor/ckeditor5-code-block": "^29.0.0",
+    "@ckeditor/ckeditor5-editor-classic": "^29.0.0",
+    "@ckeditor/ckeditor5-essentials": "^29.0.0",
+    "@ckeditor/ckeditor5-heading": "^29.0.0",
+    "@ckeditor/ckeditor5-horizontal-line": "^29.0.0",
+    "@ckeditor/ckeditor5-image": "^29.0.0",
+    "@ckeditor/ckeditor5-indent": "^29.0.0",
+    "@ckeditor/ckeditor5-link": "^29.0.0",
+    "@ckeditor/ckeditor5-list": "^29.0.0",
+    "@ckeditor/ckeditor5-markdown-gfm": "^29.0.0",
+    "@ckeditor/ckeditor5-media-embed": "^29.0.0",
+    "@ckeditor/ckeditor5-paragraph": "^29.0.0",
+    "@ckeditor/ckeditor5-remove-format": "^29.0.0",
+    "@ckeditor/ckeditor5-source-editing": "^29.0.0",
+    "@ckeditor/ckeditor5-table": "^29.0.0"
   },
   "devDependencies": {
-    "@ckeditor/ckeditor5-core": "^28.0.0",
+    "@ckeditor/ckeditor5-core": "^29.0.0",
     "@ckeditor/ckeditor5-dev-utils": "^25.0.0",
     "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.0.0",
-    "@ckeditor/ckeditor5-theme-lark": "^28.0.0",
+    "@ckeditor/ckeditor5-theme-lark": "^29.0.0",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.1",
     "style-loader": "^1.2.1",
@@ -75,9 +75,9 @@
     "directory": "packages/ckeditor5-build-classic"
   },
   "scripts": {
-    "analyze": "webpack-bundle-analyzer ./stats.json",
+    "analyze": "webpack --analyze",
     "build": "webpack",
-    "postbuild": "cp ./src/ckmd.d.ts ./lib/",
+    "postbuild": "cp ./src/ckeditor.d.ts ./build/",
     "dev": "yarn build --mode development",
     "prepublish": "yarn build",
     "preversion": "yarn build"

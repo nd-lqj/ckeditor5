@@ -507,8 +507,8 @@ describe( 'SourceEditing - integration with Markdown', () => {
 		const wrapper = domRoot.nextSibling;
 		const textarea = wrapper.children[ 0 ];
 
-		expect( editor.getData() ).to.equal( '## Heading' );
-		expect( textarea.value ).to.equal( '## Heading' );
+		expect( editor.getData() ).to.equal( '## Heading\n' );
+		expect( textarea.value ).to.equal( '## Heading\n' );
 	} );
 
 	it( 'the content should not be additionally formatted when the content includes <> characters', () => {
@@ -520,7 +520,7 @@ describe( 'SourceEditing - integration with Markdown', () => {
 		const wrapper = domRoot.nextSibling;
 		const textarea = wrapper.children[ 0 ];
 
-		expect( editor.getData() ).to.equal( '\\<paragraph>Foo\\</paragraph>' );
-		expect( textarea.value ).to.equal( '\\<paragraph>Foo\\</paragraph>' );
+		expect( editor.getData() ).to.equal( '\\<paragraph>Foo\\</paragraph>\n' );
+		expect( textarea.value ).to.equal( '\\<paragraph>Foo\\</paragraph>\n' );
 	} );
 } );

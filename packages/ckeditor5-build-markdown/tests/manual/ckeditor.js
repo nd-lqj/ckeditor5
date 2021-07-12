@@ -3,10 +3,9 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-/* eslint-env commonjs */
 /* globals window, document, console */
 
-const CKMD = require( '../../ckmd' );
+import CKMD from '../../build/ckeditor';
 
 CKMD.create( document.querySelector( '#editor' ) )
 	.then( editor => {
