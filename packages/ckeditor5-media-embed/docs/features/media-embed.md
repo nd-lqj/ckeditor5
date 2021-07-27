@@ -60,7 +60,7 @@ When the media embed feature is asked to embed a specific media element via its 
 If, for instance, the URL to embed is `https://www.youtube.com/watch?v=H08tGjXNHO4`, the feature is able to predict that it needs to produce the following HTML to show this YouTube video:
 
 ```html
-<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.2493%;">
+<div style="position: relative; padding-bottom: 100%; height: 0; padding-bottom: 56.25%;">
 	<iframe src="https://www.youtube.com/embed/${ videoId }"
 		style="position: absolute; width: 100%; height: 100%; top: 0; left: 0;"
 		frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>

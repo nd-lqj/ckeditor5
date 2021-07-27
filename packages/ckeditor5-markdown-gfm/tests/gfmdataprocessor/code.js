@@ -233,7 +233,7 @@ describe( 'GFMDataProcessor', () => {
 
 				'<p><code>code `` code ```</code></p>',
 
-				'`code `` code ``` `\n'
+				'` code `` code ``` `\n'
 			);
 		} );
 

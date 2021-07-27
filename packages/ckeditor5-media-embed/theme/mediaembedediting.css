@@ -30,7 +30,7 @@
 		}
 	}
 
-	&[data-oembed-url*="twitter.com"],
+	/* &[data-oembed-url*="twitter.com"],
 	&[data-oembed-url*="google.com/maps"],
 	&[data-oembed-url*="goo.gl/maps"],
 	&[data-oembed-url*="maps.google.com"],
@@ -40,7 +40,7 @@
 		& .ck-media__placeholder__icon * {
 			display: none;
 		}
-	}
+	} */
 }
 
 /* Disable all mouse interaction as long as the editor is not read–only.

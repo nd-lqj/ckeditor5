@@ -162,16 +162,16 @@ describe( 'AutoMediaEmbed - integration', () => {
 			);
 		} );
 
-		it( 'works fine if a media has no preview', () => {
-			setData( editor.model, '<paragraph>[]</paragraph>' );
-			pasteHtml( editor, 'https://twitter.com/ckeditor/status/1035181110140063749' );
+		// it( 'works fine if a media has no preview', () => {
+		// 	setData( editor.model, '<paragraph>[]</paragraph>' );
+		// 	pasteHtml( editor, 'https://twitter.com/ckeditor/status/1035181110140063749' );
 
-			clock.tick( 100 );
+		// 	clock.tick( 100 );
 
-			expect( getData( editor.model ) ).to.equal(
-				'[<media url="https://twitter.com/ckeditor/status/1035181110140063749"></media>]'
-			);
-		} );
+		// 	expect( getData( editor.model ) ).to.equal(
+		// 		'[<media url="https://twitter.com/ckeditor/status/1035181110140063749"></media>]'
+		// 	);
+		// } );
 
 		it( 'works for URL that was pasted as a link', () => {
 			setData( editor.model, '<paragraph>[]</paragraph>' );
@@ -353,39 +353,39 @@ describe( 'AutoMediaEmbed - integration', () => {
 			);
 		} );
 
-		it( 'replaces a URL in media if pasted a link when other media element was selected', () => {
-			setData(
-				editor.model,
-				'[<media url="https://open.spotify.com/album/2IXlgvecaDqOeF3viUZnPI?si=ogVw7KlcQAGZKK4Jz9QzvA"></media>]'
-			);
+		// it( 'replaces a URL in media if pasted a link when other media element was selected', () => {
+		// 	setData(
+		// 		editor.model,
+		// 		'[<media url="https://open.spotify.com/album/2IXlgvecaDqOeF3viUZnPI?si=ogVw7KlcQAGZKK4Jz9QzvA"></media>]'
+		// 	);
 
-			pasteHtml( editor, 'https://www.youtube.com/watch?v=H08tGjXNHO4' );
+		// 	pasteHtml( editor, 'https://www.youtube.com/watch?v=H08tGjXNHO4' );
 
-			clock.tick( 100 );
+		// 	clock.tick( 100 );
 
-			expect( getData( editor.model ) ).to.equal(
-				'[<media url="https://www.youtube.com/watch?v=H08tGjXNHO4"></media>]'
-			);
-		} );
+		// 	expect( getData( editor.model ) ).to.equal(
+		// 		'[<media url="https://www.youtube.com/watch?v=H08tGjXNHO4"></media>]'
+		// 	);
+		// } );
 
-		it( 'inserts a new media element if pasted a link when other media element was selected in correct place', () => {
-			setData(
-				editor.model,
-				'<paragraph>Foo. <$text linkHref="https://cksource.com">Bar</$text></paragraph>' +
-				'[<media url="https://open.spotify.com/album/2IXlgvecaDqOeF3viUZnPI?si=ogVw7KlcQAGZKK4Jz9QzvA"></media>]' +
-				'<paragraph>Bar.</paragraph>'
-			);
+		// it( 'inserts a new media element if pasted a link when other media element was selected in correct place', () => {
+		// 	setData(
+		// 		editor.model,
+		// 		'<paragraph>Foo. <$text linkHref="https://cksource.com">Bar</$text></paragraph>' +
+		// 		'[<media url="https://open.spotify.com/album/2IXlgvecaDqOeF3viUZnPI?si=ogVw7KlcQAGZKK4Jz9QzvA"></media>]' +
+		// 		'<paragraph>Bar.</paragraph>'
+		// 	);
 
-			pasteHtml( editor, 'https://www.youtube.com/watch?v=H08tGjXNHO4' );
+		// 	pasteHtml( editor, 'https://www.youtube.com/watch?v=H08tGjXNHO4' );
 
-			clock.tick( 100 );
+		// 	clock.tick( 100 );
 
-			expect( getData( editor.model ) ).to.equal(
-				'<paragraph>Foo. <$text linkHref="https://cksource.com">Bar</$text></paragraph>' +
-				'[<media url="https://www.youtube.com/watch?v=H08tGjXNHO4"></media>]' +
-				'<paragraph>Bar.</paragraph>'
-			);
-		} );
+		// 	expect( getData( editor.model ) ).to.equal(
+		// 		'<paragraph>Foo. <$text linkHref="https://cksource.com">Bar</$text></paragraph>' +
+		// 		'[<media url="https://www.youtube.com/watch?v=H08tGjXNHO4"></media>]' +
+		// 		'<paragraph>Bar.</paragraph>'
+		// 	);
+		// } );
 
 		it( 'does nothing if URL match to media but it was removed', () => {
 			return ClassicTestEditor

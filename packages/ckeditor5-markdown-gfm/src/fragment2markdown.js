@@ -7,7 +7,7 @@
  * @module markdown-gfm/fragment2markdown
  */
 
-import unified from 'unified';
+import { unified } from 'unified';
 import { toMdast } from 'hast-util-to-mdast';
 import { gfmToMarkdown } from 'mdast-util-gfm';
 import { toMarkdown } from 'mdast-util-to-markdown';

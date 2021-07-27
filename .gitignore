@@ -8,7 +8,7 @@ yarn-error.log
 .vscode
 
 # Ignore `yarn.lock` - this file might contain info from external repositories.
-yarn.lock
+# yarn.lock
 
 # Ignore `mrgit.json` this file contains info about external repositories.
 mrgit.json

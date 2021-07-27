@@ -41,7 +41,7 @@ describe( 'CodeBlock - integration', () => {
 			expect( editor.getData() ).to.equal(
 				'```plaintext\n' +
 				'test()\n' +
-				'```'
+				'```\n'
 			);
 
 			await editor.destroy();
@@ -56,7 +56,7 @@ describe( 'CodeBlock - integration', () => {
 			expect( editor.getData() ).to.equal(
 				'```javascript\n' +
 				'test()\n' +
-				'```'
+				'```\n'
 			);
 
 			await editor.destroy();
