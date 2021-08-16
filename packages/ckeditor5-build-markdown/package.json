@@ -1,6 +1,6 @@
 {
   "name": "ckmd",
-  "version": "29.1.0-rc.0",
+  "version": "29.1.0-rc.1",
   "description": "The classic editor build of CKEditor 5 with github flavored markdown support.",
   "keywords": [
     "ckeditor5-build",
@@ -50,8 +50,8 @@
   },
   "devDependencies": {
     "@ckeditor/ckeditor5-core": "^29.1.0",
-    "@ckeditor/ckeditor5-dev-utils": "^25.3.0",
-    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.3.0",
+    "@ckeditor/ckeditor5-dev-utils": "^25.4.0",
+    "@ckeditor/ckeditor5-dev-webpack-plugin": "^25.4.0",
     "@ckeditor/ckeditor5-theme-lark": "^29.1.0",
     "postcss-loader": "^3.0.0",
     "raw-loader": "^4.0.1",
