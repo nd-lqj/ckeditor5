@@ -1,0 +1,10 @@
+{
+	"plugins": [
+		{
+			"name": "Snippet",
+			"className": "Snippet",
+			"description": "Allows for inserting predefined snippet snippets.",
+			"path": "src/snippet.js"
+		}
+	]
+}

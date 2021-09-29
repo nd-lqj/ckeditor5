@@ -32,7 +32,7 @@ And use it in your website:
 <div id="editor">
 	<p>This is the editor content.</p>
 </div>
-<script src="./node_modules/ckmd/build/ckmd.js"></script>
+<script src="./node_modules/ckmd/build/ckeditor.js"></script>
 <script>
 	CKMD
 		.create( document.querySelector( '#editor' ) )

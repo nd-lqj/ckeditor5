@@ -1,0 +1,9 @@
+msgid ""
+msgstr ""
+"Language: \n"
+"Language-Team: \n"
+"Plural-Forms: \n"
+
+msgctxt "Inset snippet snippet"
+msgid "Snippet"
+msgstr "片段"

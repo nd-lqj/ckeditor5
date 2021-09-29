@@ -324,6 +324,18 @@ See CKEditor 5 release blog posts [on the CKEditor blog](https://ckeditor.com/bl
 	</td>
 </tr>
 
+<tr>
+	<td>
+		<a href="https://github.com/crossjs/ckeditor5/tree/master/packages/ckeditor5-build-mail"><code>ckml</code></a>
+	</td>
+	<td>
+		<a href="https://www.npmjs.com/package/ckml"><img src="https://img.shields.io/npm/v/ckml.svg" alt="ckml npm package badge"></a>
+	</td>
+	<td>
+		CKEditor 5 classic editor build, with e-mail styles support.
+	</td>
+</tr>
+
 </tbody>
 </table>
 

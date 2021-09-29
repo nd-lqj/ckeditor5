@@ -17,3 +17,5 @@ build/
 
 packages/ckeditor5-build-*/lib/
 packages/ckeditor5-build-*/stats.json
+
+.DS_Store

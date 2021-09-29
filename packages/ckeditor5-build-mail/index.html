@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>CKML</title>
+	<style>
+		body {
+			margin: 0;
+		}
+		header {
+			display: flex;
+			margin: 20px;
+			gap: 20px;
+			align-items: center;
+		}
+		header > input {
+			margin-right: -10px;
+		}
+		main {
+			display: flex;
+			margin: 20px;
+			gap: 20px;
+			position: relative;
+		}
+		main > section:nth-child(1) {
+			flex: 6;
+		}
+		main > section:nth-child(2) {
+			flex: 4;
+			padding: 0 10px;
+			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
+		}
+		textarea#editor {
+			position: absolute;
+			visibility: hidden;
+			z-index: -1;
+		}
+		pre {
+			white-space: pre-wrap;
+			word-break: break-word;
+		}
+		#preview li > p {
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+
+<main>
+	<section>
+		<div id="editor">
+			<h2>Sample</h2>
+
+			<p>This is an instance of the <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/overview.html#classic-editor">classic editor build</a>.</p>
+
+			<figure class="image">
+				<img src="../tests/manual/sample.jpg" alt="Autumn fields" />
+			</figure>
+
+			<p>You can use this sample to validate whether your <a href="https://ckeditor.com/docs/ckeditor5/latest/builds/guides/development/custom-builds.html">custom build</a> works fine.</p>
+		</div>
+	</section>
+
+	<section>
+		<pre><code class="container"></code></pre>
+	</section>
+</main>
+
+<script src="../build/ckeditor.js"></script>
+<script src="./build/translations/zh-cn.js"></script>
+<script>
+	function UploadAdapterPlugin(editor) {
+		editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+			return {
+				upload() {
+					return loader.file.then(async (file) => {
+						// loader.uploaded = false;
+						await new Promise((resolve) => {
+							setTimeout(resolve, 3000);
+						});
+						// loader.uploaded = true;
+						return { default: URL.createObjectURL(file), source: null };
+					});
+				},
+				abort() {},
+			};
+		};
+	}
+
+	function handleEditor(editor) {
+		window.editor = editor;
+
+		const e2 = document.querySelector('main > :nth-child(2)');
+
+		const callback = () => {
+			e2.querySelector('.container').textContent = editor.getData();
+		}
+
+		editor.model.document.on('change:data', callback);
+
+		e2.addEventListener('dblclick', (e) => {
+			editor.setData(e.target.textContent);
+		});
+
+		setTimeout(callback, 500);
+	}
+
+	CKML.create( document.querySelector('#editor'), {
+		language: 'zh-cn',
+		extraPlugins: [
+			UploadAdapterPlugin,
+		],
+		snippet: {
+			types: [ 'userName', 'nickName' ]
+		},
+	} )
+	.then(handleEditor)
+	.catch((error) => {
+		console.error( 'There was a problem initializing the editor.', error );
+	});
+</script>
+
+</body>
+</html>

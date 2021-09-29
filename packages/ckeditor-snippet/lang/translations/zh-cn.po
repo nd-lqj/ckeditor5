@@ -1,9 +1,0 @@
-msgid ""
-msgstr ""
-"Language: \n"
-"Language-Team: \n"
-"Plural-Forms: \n"
-
-msgctxt "Inset Parameter snippets"
-msgid "Snippet"
-msgstr "片段"

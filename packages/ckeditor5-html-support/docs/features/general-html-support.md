@@ -1,7 +1,6 @@
 ---
 category: features
-modified_at: 2021-06-13
-updated_at: 2021-07-14
+modified_at: 2021-07-14
 ---
 
 # General HTML Support
@@ -194,10 +193,20 @@ htmlSupport: {
 ```
 
 <info-box>
-	Please, keep in mind that enabling all HTML features creates a security risk. It's recommended to pass to the configuration a list of disallowed elements and attributes to make sure that any malicious code won't be saved and executed in the editor.
+	Please, keep in mind that enabling all HTML features creates a security risk. It is recommended to pass a list of disallowed elements and attributes to the configuration to make sure that any malicious code will not be saved and executed in the editor.
 </info-box>
 
 The above configuration will work similarly to [`allowedContent: true`](/docs/ckeditor4/latest/api/CKEDITOR_config.html#cfg-allowedContent) option from CKEditor 4.
+
+### Security
+
+When you set up the GHS to allow elements like `<script>` or attributes like `onclick`, you expose the users of your application to a possibly malicious markup &mdash; whether it is a mistakenly copied code from a risky website or purposely provided by a bad actor. An example of that could be: `<div onclick="leakUserData()">`.
+
+The content inside the editor (what you see in the editing area) is filtered by default from typical content that could break the editor. However, the editor does not feature a full XSS filter. Thus, we recommend configuring GHS to enable specific HTML markup, instead of enabling all markup at once.
+
+Moreover, as a general rule, not exclusive to GHS, there should always be a sanitization process present on the back-end side of your application. Even the best filtering done on the browser side of your application can be mitigated and every network call can be manipulated thus bypassing front-end filtering. This can quickly become a security risk.
+
+In addition to the sanitization process and safe GHS configuration, it is highly recommended to set strict {@link builds/guides/integration/csp Content Security Policy} rules.
 
 ## Known issues
 
