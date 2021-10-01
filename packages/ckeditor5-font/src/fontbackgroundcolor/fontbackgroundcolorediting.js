@@ -102,10 +102,11 @@ export default class FontBackgroundColorEditing extends Plugin {
 				}
 			],
 			columns: 5,
-			disableConverters: false,
+			disableUpcast: false,
+			disableDowncast: false,
 		} );
 
-		if (!editor.config.get(FONT_BACKGROUND_COLOR).disableConverters) {
+		if (!editor.config.get(FONT_BACKGROUND_COLOR).disableUpcast) {
 			editor.data.addStyleProcessorRules( addBackgroundRules );
 			editor.conversion.for( 'upcast' ).elementToAttribute( {
 				view: {
@@ -119,12 +120,13 @@ export default class FontBackgroundColorEditing extends Plugin {
 					value: renderUpcastAttribute( 'background-color' )
 				}
 			} );
+		}
 
+		if (!editor.config.get(FONT_BACKGROUND_COLOR).disableDowncast) {
 			editor.conversion.for( 'downcast' ).attributeToElement( {
 				model: FONT_BACKGROUND_COLOR,
 				view: renderDowncastElement( 'background-color' )
 			} );
-
 		}
 
 		editor.commands.add( FONT_BACKGROUND_COLOR, new FontBackgroundColorCommand( editor ) );

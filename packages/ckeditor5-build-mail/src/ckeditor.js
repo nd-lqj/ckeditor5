@@ -200,12 +200,12 @@ const defaultConfig = {
 	fontColor: {
 		colors,
 		columns: 12,
-		disableConverters: true
+		disableUpcast: true
 	},
 	fontBackgroundColor: {
 		colors,
 		columns: 12,
-		disableConverters: true
+		disableUpcast: true
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'

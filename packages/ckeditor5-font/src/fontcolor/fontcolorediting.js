@@ -100,10 +100,11 @@ export default class FontColorEditing extends Plugin {
 				}
 			],
 			columns: 5,
-			disableConverters: false
+			disableUpcast: false,
+			disableDowncast: false,
 		} );
 
-		if (!editor.config.get(FONT_COLOR).disableConverters) {
+		if (!editor.config.get(FONT_COLOR).disableUpcast) {
 			editor.conversion.for( 'upcast' ).elementToAttribute( {
 				view: {
 					name: 'span',
@@ -130,7 +131,9 @@ export default class FontColorEditing extends Plugin {
 					value: viewElement => viewElement.getAttribute( 'color' )
 				}
 			} );
+		}
 
+		if (!editor.config.get(FONT_COLOR).disableDowncast) {
 			editor.conversion.for( 'downcast' ).attributeToElement( {
 				model: FONT_COLOR,
 				view: renderDowncastElement( 'color' )
