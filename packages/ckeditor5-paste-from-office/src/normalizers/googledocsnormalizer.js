@@ -11,6 +11,7 @@ import { UpcastWriter } from 'ckeditor5/src/engine';
 
 import removeBoldWrapper from '../filters/removeboldwrapper';
 import { unwrapParagraphInListItem } from '../filters/list';
+import removeStyle from '../filters/removestyle';
 
 const googleDocsMatch = /id=("|')docs-internal-guid-[-0-9a-f]+("|')/i;
 
@@ -43,12 +44,16 @@ export default class GoogleDocsNormalizer {
 	/**
 	 * @inheritDoc
 	 */
-	execute( data ) {
+	execute( data, ensureRemoveStyle ) {
 		const writer = new UpcastWriter( this.document );
 		const { body: documentFragment } = data._parsedData;
 
 		removeBoldWrapper( documentFragment, writer );
 		unwrapParagraphInListItem( documentFragment, writer );
+
+		if (ensureRemoveStyle) {
+			removeStyle(documentFragment, writer);
+		}
 
 		data.content = documentFragment;
 	}

@@ -9,6 +9,7 @@
 
 import { transformListItemLikeElementsIntoLists } from '../filters/list';
 import { replaceImagesSourceWithBase64 } from '../filters/image';
+import removeStyle from '../filters/removestyle';
 
 const msWordMatch1 = /<meta\s*name="?generator"?\s*content="?microsoft\s*word\s*\d+"?\/?>/i;
 const msWordMatch2 = /xmlns:o="urn:schemas-microsoft-com/i;
@@ -42,11 +43,15 @@ export default class MSWordNormalizer {
 	/**
 	 * @inheritDoc
 	 */
-	execute( data ) {
+	execute( data, ensureRemoveStyle ) {
 		const { body: documentFragment, stylesString } = data._parsedData;
 
 		transformListItemLikeElementsIntoLists( documentFragment, stylesString );
 		replaceImagesSourceWithBase64( documentFragment, data.dataTransfer.getData( 'text/rtf' ) );
+
+		if (ensureRemoveStyle) {
+			removeStyle(documentFragment, new UpcastWriter(this.document));
+		}
 
 		data.content = documentFragment;
 	}

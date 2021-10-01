@@ -56,6 +56,10 @@ export default class PasteFromOffice extends Plugin {
 		normalizers.push( new MSWordNormalizer( viewDocument ) );
 		normalizers.push( new GoogleDocsNormalizer( viewDocument ) );
 
+		editor.config.define( 'pastefromoffice', {
+			ensureRemoveStyle: false
+		} );
+
 		editor.plugins.get( 'ClipboardPipeline' ).on(
 			'inputTransformation',
 			( evt, data ) => {
@@ -69,7 +73,7 @@ export default class PasteFromOffice extends Plugin {
 				if ( activeNormalizer ) {
 					data._parsedData = parseHtml( htmlString, viewDocument.stylesProcessor );
 
-					activeNormalizer.execute( data );
+					activeNormalizer.execute( data, editor.config.get('pastefromoffice.ensureRemoveStyle') );
 
 					data._isTransformedWithPasteFromOffice = true;
 				}

@@ -101,27 +101,31 @@ export default class FontBackgroundColorEditing extends Plugin {
 					label: 'Purple'
 				}
 			],
-			columns: 5
+			columns: 5,
+			disableConverters: false,
 		} );
 
-		editor.data.addStyleProcessorRules( addBackgroundRules );
-		editor.conversion.for( 'upcast' ).elementToAttribute( {
-			view: {
-				name: 'span',
-				styles: {
-					'background-color': /[\s\S]+/
+		if (!editor.config.get(FONT_BACKGROUND_COLOR).disableConverters) {
+			editor.data.addStyleProcessorRules( addBackgroundRules );
+			editor.conversion.for( 'upcast' ).elementToAttribute( {
+				view: {
+					name: 'span',
+					styles: {
+						'background-color': /[\s\S]+/
+					}
+				},
+				model: {
+					key: FONT_BACKGROUND_COLOR,
+					value: renderUpcastAttribute( 'background-color' )
 				}
-			},
-			model: {
-				key: FONT_BACKGROUND_COLOR,
-				value: renderUpcastAttribute( 'background-color' )
-			}
-		} );
+			} );
 
-		editor.conversion.for( 'downcast' ).attributeToElement( {
-			model: FONT_BACKGROUND_COLOR,
-			view: renderDowncastElement( 'background-color' )
-		} );
+			editor.conversion.for( 'downcast' ).attributeToElement( {
+				model: FONT_BACKGROUND_COLOR,
+				view: renderDowncastElement( 'background-color' )
+			} );
+
+		}
 
 		editor.commands.add( FONT_BACKGROUND_COLOR, new FontBackgroundColorCommand( editor ) );
 

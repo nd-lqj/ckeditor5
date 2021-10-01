@@ -1,0 +1,10 @@
+{
+	"plugins": [
+		{
+			"name": "PreserveStyle",
+			"className": "PreserveStyle",
+			"description": "Allows for preserve css style.",
+			"path": "src/preservestyle.js"
+		}
+	]
+}

@@ -13,6 +13,12 @@ export default class SnippetEditing extends Plugin {
 	}
 
 	init() {
+		this.editor.config.define( 'snippet', {
+			prefix: '',
+			suffix: '',
+			types: []
+		} );
+
 		this._defineSchema();
 		this._defineConverters();
 
@@ -22,9 +28,6 @@ export default class SnippetEditing extends Plugin {
 			'viewToModelPosition',
 			viewToModelPositionOutsideModelElement( this.editor.model, viewElement => viewElement.hasClass( 'snippet' ) )
 		);
-		this.editor.config.define( 'snippet', {
-			types: []
-		} );
 	}
 
 	_defineSchema() {
@@ -50,6 +53,8 @@ export default class SnippetEditing extends Plugin {
 
 	_defineConverters() {
 		const conversion = this.editor.conversion;
+		const prefix = this.editor.config.get( 'snippet.prefix' );
+		const suffix = this.editor.config.get( 'snippet.suffix' );
 
 		conversion.for( 'upcast' ).elementToElement( {
 			view: {
@@ -90,7 +95,7 @@ export default class SnippetEditing extends Plugin {
 			} );
 
 			// Insert the snippet name (as a text).
-			const innerText = viewWriter.createText( '${' + name + '}' );
+			const innerText = viewWriter.createText( prefix + name + suffix );
 			viewWriter.insert( viewWriter.createPositionAt( snippetView, 0 ), innerText );
 
 			return snippetView;

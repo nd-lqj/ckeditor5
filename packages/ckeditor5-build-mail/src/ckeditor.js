@@ -6,10 +6,12 @@
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
 
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 import Autoformat from '@ckeditor/ckeditor5-autoformat/src/autoformat';
 import BlockQuote from '@ckeditor/ckeditor5-block-quote/src/blockquote';
 import Bold from '@ckeditor/ckeditor5-basic-styles/src/bold';
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
+import Font from '@ckeditor/ckeditor5-font/src/font';
 import Heading from '@ckeditor/ckeditor5-heading/src/heading';
 import HeadingButtonsUI from '@ckeditor/ckeditor5-heading/src/headingbuttonsui';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
@@ -27,25 +29,27 @@ import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import ParagraphButtonUI from '@ckeditor/ckeditor5-paragraph/src/paragraphbuttonui';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
+import PreserveStyle from '@ckeditor/ckeditor5-preserve-style/src/preservestyle';
 import RemoveFormat from '@ckeditor/ckeditor5-remove-format/src/removeformat';
 import Snippet from '@ckeditor/ckeditor5-snippet/src/snippet';
 import SourceEditing from '@ckeditor/ckeditor5-source-editing/src/sourceediting';
+import Subscript from '@ckeditor/ckeditor5-basic-styles/src/subscript';
+import Superscript from '@ckeditor/ckeditor5-basic-styles/src/superscript';
 import Strikethrough from '@ckeditor/ckeditor5-basic-styles/src/strikethrough';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
-
-/**
- * extra plugins
- */
-import PreserveStyle from './extraPlugins/preservestyle';
+import Title from '@ckeditor/ckeditor5-heading/src/title';
+import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 
 // Plugins to include in the build.
 const builtinPlugins = [
+	Alignment,
 	Autoformat,
 	BlockQuote,
 	Bold,
 	Essentials,
+	Font,
 	Heading,
 	HeadingButtonsUI,
 	HorizontalLine,
@@ -63,19 +67,58 @@ const builtinPlugins = [
 	Paragraph,
 	ParagraphButtonUI,
 	PasteFromOffice,
+	PreserveStyle,
 	RemoveFormat,
 	Snippet,
 	SourceEditing,
 	Strikethrough,
+	Subscript,
+	Superscript,
 	Table,
 	TableToolbar,
 	TextTransformation,
-
-	/**
-	 * extra plugins
-	 */
-	PreserveStyle
+	Title,
+	Underline
 ];
+
+const colors = [
+	'#4D4D4D',
+	'#999999',
+	'#FFFFFF',
+	'#F44E3B',
+	'#FE9200',
+	'#FCDC00',
+	'#DBDF00',
+	'#A4DD00',
+	'#68CCCA',
+	'#73D8FF',
+	'#AEA1FF',
+	'#FDA1FF',
+	'#333333',
+	'#808080',
+	'#CCCCCC',
+	'#D33115',
+	'#E27300',
+	'#FCC400',
+	'#B0BC00',
+	'#68BC00',
+	'#16A5A5',
+	'#009CE0',
+	'#7B64FF',
+	'#FA28FF',
+	'#000000',
+	'#666666',
+	'#B3B3B3',
+	'#9F0500',
+	'#C45100',
+	'#FB9E00',
+	'#808900',
+	'#194D33',
+	'#0C797D',
+	'#0062B1',
+	'#653294',
+	'#AB149E'
+].map( color => ( { color, label: color } ) );
 
 // Editor configuration.
 const defaultConfig = {
@@ -86,14 +129,21 @@ const defaultConfig = {
 			'|',
 			'removeFormat',
 			'|',
-			'paragraph',
-			'heading2',
-			'heading3',
-			'heading4',
+			'heading',
+			'|',
+			'alignment',
+			'|',
+			'fontSize',
+			'fontFamily',
+			'fontColor',
+			'fontBackgroundColor',
 			'|',
 			'bold',
 			'italic',
+			'underline',
 			'strikethrough',
+			'subscript',
+			'superscript',
 			'|',
 			'horizontalLine',
 			'blockQuote',
@@ -111,16 +161,11 @@ const defaultConfig = {
 			'snippet',
 			'|',
 			'sourceEditing'
-		]
+		],
+		shouldNotGroupWhenFull: true
 	},
-	heading: {
-		options: [
-			// https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#heading-levels
-			{ model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-			{ model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-			{ model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-			{ model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' }
-		]
+	link: {
+		addTargetToExternalLinks: true
 	},
 	image: {
 		toolbar: [
@@ -144,7 +189,23 @@ const defaultConfig = {
 		]
 	},
 	snippet: {
-		types: [ 'userName', 'nickName' ]
+		types: [ ]
+	},
+	pastefromoffice: {
+		ensureRemoveStyle: true
+	},
+	fontSize: {
+		options: [ 10, 12, 'default', 18, 24, 32, 48 ]
+	},
+	fontColor: {
+		colors,
+		columns: 12,
+		disableConverters: true
+	},
+	fontBackgroundColor: {
+		colors,
+		columns: 12,
+		disableConverters: true
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'

@@ -99,40 +99,43 @@ export default class FontColorEditing extends Plugin {
 					label: 'Purple'
 				}
 			],
-			columns: 5
+			columns: 5,
+			disableConverters: false
 		} );
 
-		editor.conversion.for( 'upcast' ).elementToAttribute( {
-			view: {
-				name: 'span',
-				styles: {
-					'color': /[\s\S]+/
+		if (!editor.config.get(FONT_COLOR).disableConverters) {
+			editor.conversion.for( 'upcast' ).elementToAttribute( {
+				view: {
+					name: 'span',
+					styles: {
+						'color': /[\s\S]+/
+					}
+				},
+				model: {
+					key: FONT_COLOR,
+					value: renderUpcastAttribute( 'color' )
 				}
-			},
-			model: {
-				key: FONT_COLOR,
-				value: renderUpcastAttribute( 'color' )
-			}
-		} );
+			} );
 
-		// Support legacy `<font color="..">` formatting.
-		editor.conversion.for( 'upcast' ).elementToAttribute( {
-			view: {
-				name: 'font',
-				attributes: {
-					'color': /^#?\w+$/
+			// Support legacy `<font color="..">` formatting.
+			editor.conversion.for( 'upcast' ).elementToAttribute( {
+				view: {
+					name: 'font',
+					attributes: {
+						'color': /^#?\w+$/
+					}
+				},
+				model: {
+					key: FONT_COLOR,
+					value: viewElement => viewElement.getAttribute( 'color' )
 				}
-			},
-			model: {
-				key: FONT_COLOR,
-				value: viewElement => viewElement.getAttribute( 'color' )
-			}
-		} );
+			} );
 
-		editor.conversion.for( 'downcast' ).attributeToElement( {
-			model: FONT_COLOR,
-			view: renderDowncastElement( 'color' )
-		} );
+			editor.conversion.for( 'downcast' ).attributeToElement( {
+				model: FONT_COLOR,
+				view: renderDowncastElement( 'color' )
+			} );
+		}
 
 		editor.commands.add( FONT_COLOR, new FontColorCommand( editor ) );
 

@@ -10,6 +10,8 @@ export default class SnippetUI extends Plugin {
 	init() {
 		const editor = this.editor;
 		const t = editor.t;
+		const prefix = editor.config.get( 'snippet.prefix' );
+		const suffix = editor.config.get( 'snippet.suffix' );
 		const snippetNames = editor.config.get( 'snippet.types' );
 
 		// The "snippet" dropdown must be registered among the UI components of the editor
@@ -18,7 +20,7 @@ export default class SnippetUI extends Plugin {
 			const dropdownView = createDropdown( locale );
 
 			// Populate the list in the dropdown with items.
-			addListToDropdown( dropdownView, getDropdownItemsDefinitions( snippetNames ) );
+			addListToDropdown( dropdownView, getDropdownItemsDefinitions( snippetNames, prefix, suffix ) );
 
 			dropdownView.buttonView.set( {
 				// The t() function helps localize the editor. All strings enclosed in t() can be
@@ -44,7 +46,7 @@ export default class SnippetUI extends Plugin {
 	}
 }
 
-function getDropdownItemsDefinitions( snippetNames ) {
+function getDropdownItemsDefinitions( snippetNames, prefix, suffix ) {
 	const itemDefinitions = new Collection();
 
 	for ( const name of snippetNames ) {
@@ -52,7 +54,7 @@ function getDropdownItemsDefinitions( snippetNames ) {
 			type: 'button',
 			model: new Model( {
 				commandParam: name,
-				label: name,
+				label: prefix + name + suffix,
 				withText: true
 			} )
 		};
