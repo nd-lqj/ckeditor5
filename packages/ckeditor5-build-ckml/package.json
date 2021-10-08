@@ -1,7 +1,7 @@
 {
   "name": "ckml",
   "version": "29.2.2",
-  "description": "The classic editor build of CKEditor 5 – the best browser-based rich text editor.",
+  "description": "The classic editor build of CKEditor 5 with email legacy style support.",
   "keywords": [
     "ckeditor5-build",
     "ckeditor",
@@ -18,7 +18,10 @@
     "collaboration",
     "collaborative",
     "real-time",
-    "framework"
+    "framework",
+    "email",
+    "legacy",
+    "style"
   ],
   "main": "./build/ckeditor.js",
   "files": [
