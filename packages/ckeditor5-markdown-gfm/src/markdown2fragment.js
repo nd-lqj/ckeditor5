@@ -25,7 +25,7 @@ const processor = unified()
 		extensions: [ gfm( {
 			singleTilde: true
 		} ) ],
-		mdastExtensions: [ gfmFromMarkdown ]
+		mdastExtensions: [ gfmFromMarkdown() ]
 	} )
 	.use( function table( ) {
 		return tree => {
