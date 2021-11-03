@@ -42,6 +42,8 @@ import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformatio
 import Title from '@ckeditor/ckeditor5-heading/src/title';
 import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 
+import '../theme/theme.css';
+
 // Plugins to include in the build.
 const builtinPlugins = [
 	Alignment,

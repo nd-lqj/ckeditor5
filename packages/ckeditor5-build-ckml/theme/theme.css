@@ -1,0 +1,7 @@
+:root {
+    --ck-border-radius: 4px;
+}
+
+.ck.ck-editor__main > .ck-editor__editable {
+	min-height: 7em;
+}

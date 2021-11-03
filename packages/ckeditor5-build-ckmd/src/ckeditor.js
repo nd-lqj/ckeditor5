@@ -38,6 +38,8 @@ import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
  */
 import DisallowNestingTables from './extraPlugins/disallownestingtables';
 
+import '../theme/theme.css';
+
 // Plugins to include in the build.
 const builtinPlugins = [
 	BlockQuote,
