@@ -5,3 +5,17 @@
 .ck.ck-editor__main > .ck-editor__editable {
 	min-height: 7em;
 }
+
+.ck .ck-sticky-panel .ck-sticky-panel__content_sticky {
+    position: static !important;
+    width: auto !important
+}
+
+.ck-editor__top .ck-sticky-panel__placeholder {
+    display: none !important;
+    height: 0 !important;
+}
+
+.ck .ck-editor__top .ck-sticky-panel .ck-sticky-panel__content_sticky .ck-toolbar {
+    border-bottom-width: 0 !important;
+}
