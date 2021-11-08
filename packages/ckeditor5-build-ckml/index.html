@@ -17,18 +17,10 @@
 			margin-right: -10px;
 		}
 		main {
-			display: flex;
-			margin: 20px;
+			margin: 0px;
+			padding: 0px;
 			gap: 20px;
 			position: relative;
-		}
-		main > section:nth-child(1) {
-			flex: 6;
-		}
-		main > section:nth-child(2) {
-			flex: 4;
-			padding: 0 10px;
-			box-shadow: inset 0 0 0 1px hsl(0, 0%, 80%);
 		}
 		textarea#editor {
 			position: absolute;
@@ -46,8 +38,13 @@
 </head>
 <body>
 
-<main>
-	<section>
+<main style="height: 100vh; overflow: hidden; display: grid;grid-template-rows: auto 1fr;grid-gap: 8px;">
+	<div>
+		<div style="height:80px;background:burlywood;margin-bottom:24px;"></div>
+		<div style="height:80px;width:100%;background:rgba(256,0,0,0.5);position:fixed;top:0;z-index: 4;"></div>
+	</div>
+	<div style="overflow: auto;display: grid; grid-template-rows: 80px 1fr 68px; gap: 0px;" id="scrollBodyContainer">
+		<div style="background: #653294">xxxxx</div>
 		<div id="editor">
 			<h1>
 				One WYSIWYG framework, multiple purposes
@@ -58,15 +55,16 @@
 			<p style="text-align:center;">
 				<a target="_blank" rel="noopener noreferrer" href="https://ckeditor.com/docs/ckeditor5/latest/examples/index.html"><span style="font-size:24px;"><span style="background-color:#2BA68C;border-radius:0.25em;color:#FFFFFF;display:inline-block;padding:0.5em 1em;text-decoration:none;">Examples</span></span></a>
 			</p>
-		</div>
-	</section>
 
-	<section>
-		<pre><code class="container"></code></pre>
-	</section>
+		</div>
+		<div>
+			<pre style="width: 200px;"><code class="container"></code></pre>
+		</div>
+		<div>footer</div>
+	</div>
 </main>
 
-<script src="../build/ckeditor.js"></script>
+<script src="./build/ckeditor.js"></script>
 <script src="./build/translations/zh-cn.js"></script>
 <script>
 	function UploadAdapterPlugin(editor) {
@@ -90,10 +88,10 @@
 	function handleEditor(editor) {
 		window.editor = editor;
 
-		const e2 = document.querySelector('main > :nth-child(2)');
+		const e2 = document.querySelector('.container');
 
 		const callback = () => {
-			e2.querySelector('.container').textContent = editor.getData();
+			e2.textContent = editor.getData();
 		}
 
 		editor.model.document.on('change:data', callback);
@@ -115,6 +113,15 @@
 			suffix: '}',
 			types: [ 'userName', 'nickName' ]
 		},
+		ui: {
+			enableSticky: true,
+			getScrollParent: () => {
+				return document.querySelector('#scrollBodyContainer');
+			},
+			viewportOffset: {
+				top: 112,
+			}
+		}
 	} )
 	.then(handleEditor)
 	.catch((error) => {
