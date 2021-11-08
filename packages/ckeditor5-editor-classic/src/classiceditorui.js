@@ -74,6 +74,9 @@ export default class ClassicEditorUI extends EditorUI {
 		// The editable UI and editing root should share the same name. Then name is used
 		// to recognize the particular editable, for instance in ARIA attributes.
 		editable.name = editingRoot.rootName;
+		
+		// 滚动监听对象的获取方法，需要在 render 之前先配置好
+		view.stickyPanel.bind( 'getScrollParent' ).to( this, 'getScrollParent' );
 
 		view.render();
 
@@ -143,7 +146,8 @@ export default class ClassicEditorUI extends EditorUI {
 		view.stickyPanel.bind( 'isActive' ).to( this.focusTracker, 'isFocused' );
 		view.stickyPanel.limiterElement = view.element;
 		view.stickyPanel.bind( 'viewportTopOffset' ).to( this, 'viewportOffset', ( { top } ) => top );
-
+		view.stickyPanel.bind( 'enableSticky' ).to( this, 'enableSticky' );
+		
 		view.toolbar.fillFromConfig( this._toolbarConfig, this.componentFactory );
 
 		enableToolbarKeyboardFocus( {
