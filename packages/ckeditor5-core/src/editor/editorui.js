@@ -85,7 +85,8 @@ export default class EditorUI {
 		 * @member {Object} #viewportOffset
 		 */
 		this.set( 'viewportOffset', this._readViewportOffsetFromConfig() );
-
+		this.set( 'enableSticky', this._readEnableStickyFromConfig() );
+		this.set( 'getScrollParent', this._readGetScrollParentFromConfig() );
 		/**
 		 * Stores all editable elements used by the editor instance.
 		 *
@@ -254,6 +255,20 @@ export default class EditorUI {
 		return { top: 0 };
 	}
 
+	_readEnableStickyFromConfig() {
+		const editor = this.editor;
+		const enableStickyConfig = editor.config.get( 'ui.enableSticky' );
+
+		// 默认允许 Sticky
+		return enableStickyConfig !== false;
+	}
+
+	_readGetScrollParentFromConfig() {
+		const editor = this.editor;
+		const ui = editor.config.get( 'ui' );
+		return ui.getScrollParent;
+	}
+	
 	/**
 	 * Fired when the editor UI is ready.
 	 *
