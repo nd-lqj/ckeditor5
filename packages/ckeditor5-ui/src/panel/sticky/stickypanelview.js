@@ -90,7 +90,9 @@ export default class StickyPanelView extends View {
 		 * @member {Number} #viewportTopOffset
 		 */
 		this.set( 'viewportTopOffset', 0 );
-
+		this.set( 'enableSticky', true );
+		this.set( 'getScrollParent', null );
+		
 		/**
 		 * Controls the `margin-left` CSS style of the panel.
 		 *
@@ -232,8 +234,13 @@ export default class StickyPanelView extends View {
 		// Check if the panel should go into the sticky state immediately.
 		this._checkIfShouldBeSticky();
 
+		let scrollElement = global.window;
+		if (this.getScrollParent) {
+			scrollElement = this.getScrollParent(this);
+		}
+		
 		// Update sticky state of the panel as the window is being scrolled.
-		this.listenTo( global.window, 'scroll', () => {
+		this.listenTo( scrollElement, 'scroll', () => {
 			this._checkIfShouldBeSticky();
 		} );
 
@@ -253,7 +260,7 @@ export default class StickyPanelView extends View {
 		const panelRect = this._panelRect = this._contentPanel.getBoundingClientRect();
 		let limiterRect;
 
-		if ( !this.limiterElement ) {
+		if ( !this.limiterElement || this.enableSticky === false ) {
 			this.isSticky = false;
 		} else {
 			limiterRect = this._limiterRect = this.limiterElement.getBoundingClientRect();
